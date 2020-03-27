@@ -44,7 +44,7 @@
 
             .top-right {
                 position: absolute;
-                right: 10px;
+                right: 50px;
                 top: 18px;
             }
 
@@ -59,7 +59,7 @@
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
-                font-size: 13px;
+                font-size: 17px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
@@ -112,10 +112,10 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Register</a>
                         @endif
                     @endauth
                 </div>
