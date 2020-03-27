@@ -1,4 +1,7 @@
 @extends('layouts.admin')
 @section('content')
-<h1>Admin</h1>
+<div class="carousel-inner">
+     <div class="carousel-item active">
+     <img src="gambar/smk2.jpg" alt="Gambar - 1" >
+</div>
 @stop
