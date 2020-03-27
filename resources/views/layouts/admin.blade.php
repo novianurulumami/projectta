@@ -40,7 +40,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">SMK PGRI ROGOJAMPI</a>
+            <a class="navbar-brand" href="/">SIAPTASI</a>
         </div>
         <!-- /.navbar-header -->
 
