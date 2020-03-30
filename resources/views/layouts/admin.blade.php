@@ -147,7 +147,7 @@
 
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Laporan</a>
+                        <a href="{{ url('/laporan') }}"><i class="fa fa-wrench fa-fw"></i>Laporan</a>
                         
                         <!-- /.nav-second-level -->
                     </li>
@@ -159,13 +159,13 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Keterampilan</a>
+                        <a href="{{ url('/keterampilan') }}"><i class="fa fa-wrench fa-fw"></i>Keterampilan</a>
                        
                         <!-- /.nav-second-level -->
                     </li>
                    
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Keluar</a>
+                        <a href="{{ url('/keluar') }}"><i class="fa fa-wrench fa-fw"></i>Keluar</a>
                        
                         <!-- /.nav-second-level -->
                     </li>

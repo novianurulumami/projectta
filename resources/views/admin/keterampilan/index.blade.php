@@ -1,4 +1,4 @@
 @extends('layouts.admin')
 @section('content')
-<h3>keterampilan</h3>
+<h3>Keterampilan</h3>
 @stop

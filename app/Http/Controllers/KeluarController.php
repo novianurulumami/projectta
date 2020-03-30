@@ -13,7 +13,7 @@ class KeluarController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.keluar.index');
     }
 
     /**
