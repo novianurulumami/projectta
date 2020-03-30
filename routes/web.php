@@ -26,3 +26,6 @@ Route::get('/home1', function(){
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/datasiswa', 'DataSiswaController@index')->name('datasiswa');
 Route::get('/jurnalumum', 'JurnalUmumController@index')->name('jurnalumum');
+Route::get('/laporan', 'LaporanController@index')->name('laporan');
+Route::get('/keterampilan', 'KeterampilanController@index')->name('keterampilan');
+Route::get('/keluar', 'KeluarController@index')->name('keluar');
