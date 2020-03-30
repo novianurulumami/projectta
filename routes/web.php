@@ -25,3 +25,4 @@ Route::get('/home1', function(){
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/datasiswa', 'DataSiswaController@index')->name('datasiswa');
+Route::get('/jurnalumum', 'JurnalUmumController@index')->name('jurnalumum');

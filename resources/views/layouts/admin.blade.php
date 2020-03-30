@@ -154,7 +154,7 @@
 
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Jurnal Umum</span></a>
+                        <a href="{{ url('/jurnalumum') }}"><i class="fa fa-wrench fa-fw"></i>Jurnal Umum</span></a>
                         <!-- /.nav-second-level -->
                     </li>
 
