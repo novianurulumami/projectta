@@ -40,7 +40,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">SIAPTASI</a>
+            <a class="navbar-brand" href="{{ url('/home') }}">SIAPTASI</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -122,7 +122,7 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="{{ url('/dashboard') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
 
                     <li>
