@@ -126,7 +126,7 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Data Siswa</a>
+                        <a href="{{ url('/datasiswa') }}"><i class="fa fa-wrench fa-fw"></i>Data Siswa</a>
                         <!-- /.nav-second-level -->
                     </li>
 
