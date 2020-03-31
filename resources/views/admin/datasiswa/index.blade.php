@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 @section('content')
+<style>
+
+</style>
 <div class="container-fluid">
     <div class="row">
         <h3>Data Siswa</h3>
@@ -8,6 +11,7 @@
             <a href="#" class="btn btn-info active" role="button" aria-pressed="true">Edit Data Kelas</a>
             <a href="#" class="btn btn-info active" role="button" aria-pressed="true">Import Data</a>
             <a href="#" class="btn btn-info active" role="button" aria-pressed="true">Export Data</a>
+            <br/><br/>
             <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Dropdown button
@@ -23,6 +27,7 @@
                 </li>
                 </ul>
             </div>
+            <br/><br/>
             <div class="sidebar-search">
                         <div class="input-group custom-search-form">
                             <input type="text" class="form-control" placeholder="Search...">
