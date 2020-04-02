@@ -23,9 +23,9 @@ Route::get('/home1', function(){
     return view('admin.index');
     }); 
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::get('/datasiswa', 'DataSiswaController@index')->name('datasiswa');
-Route::get('/jurnalumum', 'JurnalUmumController@index')->name('jurnalumum');
-Route::get('/laporan', 'LaporanController@index')->name('laporan');
-Route::get('/keterampilan', 'KeterampilanController@index')->name('keterampilan');
-Route::get('/keluar', 'KeluarController@index')->name('keluar');
+    Route::resource('dashboard', 'DashboardController');
+    Route::resource('datasiswa', 'DataSiswaController');
+    Route::resource('laporan', 'LaporanController');
+    Route::resource('jurnalumum', 'JurnalUmumController');
+    Route::resource('keterampilan', 'KeterampilanController');
+    Route::resource('keluar', 'KeluarController');
