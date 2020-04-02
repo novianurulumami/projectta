@@ -1,9 +1,16 @@
 @extends('layouts.admin')
 @section('content')
-<style>
+<!DOCTYPE html>
+<html lang="en">
 
-</style>
-<div class="container-fluid">
+<head>
+    <link href="{{asset('css/dropdown.css')}}" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+</head>
+<div class="container-fruid">
     <div class="row">
         <h3>Data Siswa</h3>
         <div class="col-4">
@@ -13,20 +20,115 @@
             <a href="#" class="btn btn-info active" role="button" aria-pressed="true">Export Data</a>
             <br/><br/>
             <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown button
-            </button>
-                <ul class="dropdown-menu dropdown-user">
-                <li><a href="#">Akuntansi</a>
-                </li>
-                <li><a href="#">Multimedia</a>
-                </li>
-                <li><a href="#">Pemasaran</a>
-                </li>
-                <li><a href="#">Perkantoran</a>
-                </li>
+            <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-info active" data-target="#" href="/page.html">
+                Jurusan <span class="caret"></span>
+            </a>
+    		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+            <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Akuntansi</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-submenu">
+                    <a href="#">X AK</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                    	<li><a href="#">4</a></li>
+                    </ul>
+                    <a href="#">XI AK</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                    	<li><a href="#">4</a></li>
+                    </ul>
+                    <a href="#">XII AK</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                    	<li><a href="#">4</a></li>
+                    </ul>
+                  </li>
                 </ul>
-            </div>
+              </li>
+
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Multimedia</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-submenu">
+                    <a href="#">X MM</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                    	<li><a href="#">2</a></li>
+                    </ul>
+                    <a href="#">XI MM</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                    	<li><a href="#">2</a></li>
+                    </ul>
+                    <a href="#">XII MM</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                    	<li><a href="#">2</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Pemasaran</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-submenu">
+                    <a href="#">X PM</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                    </ul>
+                    <a href="#">XI PM</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                    </ul>
+                    <a href="#">XII PM</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Perkantoran</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-submenu">
+                    <a href="#">X AP</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                    	<li><a href="#">4</a></li>
+                    </ul>
+                    <a href="#">XI AP</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                    	<li><a href="#">4</a></li>
+                    </ul>
+                    <a href="#">XII AP</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                    	<li><a href="#">4</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+        </div>
             <br/><br/>
             <div class="sidebar-search">
                         <div class="input-group custom-search-form">
@@ -40,6 +142,34 @@
                         </div>
             </div>
         </div>
+        <br/><br/>
+
+        <section class="content">
+        <div class="box">  
+        <div class="box-header">
+        <a href="#"> <button type="button" class="btn btn-success"> <i class="fa fa-search-plus"></i>  Lihat Transaksi</button></a>
+        <br/><br/>
+
+        <div class="box-body">
+          <table class="table table-stripped table-bordered">
+            <thread>
+              <tr>
+                <th>NO ID</th>
+                <th>CODE</th>
+                <th>KELAS</th>
+                <th>NAMA SISWA</th>
+                <th>JUMLAH SALDO</th>
+                <th>AKSI</th>
+              </tr>
+            </thread>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
     </div>
 </div>
+
+</html>
 @stop
