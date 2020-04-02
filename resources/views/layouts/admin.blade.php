@@ -124,7 +124,7 @@
                     </li>
                     <!-- /.dropdown -->
                     <li>
-                        <a href="{{ url('/dashboard') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="{{route('dashboard.index')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
 
                     <li>
