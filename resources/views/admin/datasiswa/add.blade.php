@@ -21,6 +21,7 @@
                 <th>JENIS KELAMIN</th>
                 <th>ALAMAT</th>
                 <th>NO. TELP</th>
+                <th>NO. TELP</th>
               </tr>
             </thread>
             <tbody>
