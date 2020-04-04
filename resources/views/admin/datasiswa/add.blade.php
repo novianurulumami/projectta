@@ -20,6 +20,7 @@
                 <th>THN ANGKATAN</th>
                 <th>JENIS KELAMIN</th>
                 <th>ALAMAT</th>
+                <th>ALAMAT</th>
               </tr>
             </thread>
             <tbody>
