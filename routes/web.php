@@ -29,3 +29,4 @@ Route::get('/home1', function(){
     Route::resource('jurnalumum', 'JurnalUmumController');
     Route::resource('keterampilan', 'KeterampilanController');
     Route::resource('keluar', 'KeluarController');
+    Route::resource('datakelas', 'EditDataKelasController');

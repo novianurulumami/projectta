@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DataSiswaController extends Controller
+class EditDataKelasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,8 @@ class DataSiswaController extends Controller
      */
     public function index()
     {
-        return view('admin.datasiswa.index');
+        //
+        return view('admin.datasiswa.editdata');
     }
 
     /**
@@ -24,7 +25,6 @@ class DataSiswaController extends Controller
     public function create()
     {
         //
-        return view('admin.datasiswa.add');
     }
 
     /**
@@ -58,7 +58,6 @@ class DataSiswaController extends Controller
     public function edit($id)
     {
         //
-        
     }
 
     /**
