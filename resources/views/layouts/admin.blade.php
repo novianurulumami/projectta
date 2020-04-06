@@ -136,11 +136,11 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i>Transaksi<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/posts">Setoran</a>
+                                <a href="{{route('setoran.index')}}">Setoran</a>
                             </li>
 
                             <li>
-                                <a href="/posts/create">Penarikan</a>
+                                <a href="{{route('penarikan.index')}}">Penarikan</a>
                             </li>
 
                         </ul>

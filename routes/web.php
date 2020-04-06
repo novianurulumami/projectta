@@ -29,3 +29,6 @@ Route::get('/home', 'AdminUsersController@index')->name('home');
     Route::resource('datakelas', 'EditDataKelasController');
     Route::resource('import', 'ImportController');
     Route::resource('export', 'ExportController');
+    Route::resource('setoran', 'SetoranController');
+    Route::resource('penarikan', 'PenarikanController');
+
