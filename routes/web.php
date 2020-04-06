@@ -30,3 +30,5 @@ Route::get('/home1', function(){
     Route::resource('keterampilan', 'KeterampilanController');
     Route::resource('keluar', 'KeluarController');
     Route::resource('datakelas', 'EditDataKelasController');
+    Route::resource('import', 'ImportController');
+    Route::resource('eksport', 'EksportController');

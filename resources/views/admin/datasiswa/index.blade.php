@@ -16,7 +16,7 @@
         <div class="col-4">
             <a href="{{route('datasiswa.create')}}" class="btn btn-info active" role="button" aria-pressed="true"><i class="fa fa-plus"></i>   Tambah Data</a>
             <a href="{{route('datakelas.index')}}" class="btn btn-info active" role="button" aria-pressed="true"> <i class="fa fa-edit"></i>   Edit Data Kelas</a>
-            <a href="#" class="btn btn-info active" role="button" aria-pressed="true">Import Data</a>
+            <a href="{{route('import.index')}}" class="btn btn-info active" role="button" aria-pressed="true">Import Data</a>
             <a href="#" class="btn btn-info active" role="button" aria-pressed="true">Export Data</a>
             <br/><br/>
             <div class="dropdown">
