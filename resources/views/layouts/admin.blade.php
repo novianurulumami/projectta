@@ -161,7 +161,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ url('/keterampilan') }}"><i class="fa fa-wrench fa-fw"></i>Keterampilan</a>
+                        <a href="{{route('keterampilan.index')}}"><i class="fa fa-wrench fa-fw"></i>Keterampilan</a>
                        
                         <!-- /.nav-second-level -->
                     </li>
