@@ -40,7 +40,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('/home') }}">SIAPTASI</a>
+            <a class="navbar-brand" href="{{route('dashboard.index')}}">SIAPTASI</a>
         </div>
         <!-- /.navbar-header -->
 

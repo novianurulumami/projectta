@@ -19,9 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'AdminUsersController@index')->name('home');
 
-Route::get('/home1', function(){
-    return view('admin.index');
-    }); 
 
     Route::resource('dashboard', 'DashboardController');
     Route::resource('datasiswa', 'DataSiswaController');
@@ -31,4 +28,4 @@ Route::get('/home1', function(){
     Route::resource('keluar', 'KeluarController');
     Route::resource('datakelas', 'EditDataKelasController');
     Route::resource('import', 'ImportController');
-    Route::resource('eksport', 'EksportController');
+    Route::resource('export', 'ExportController');
