@@ -8,4 +8,6 @@
   </select>
   <label class="my-1 mr-2" for="inlineFormCustomSelectPref">No Choose File</label>
 </form>
+<br></br>
+<button type='button' class='btn btn-primary center-block'>Simpan</button>
 @stop

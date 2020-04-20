@@ -61,10 +61,7 @@
         <input id="" type="email" class="form-control " name="email" value="" required autocomplete="email" autofocus>
     </div>
 </div>
-<div class="form-group row">
-    <div class="col-md-8 offset-md-4">
-        <button type="submit" class="btn btn-primary btn-md">Simpan
-        </button>
-    </div>
-</div>
+<br></br>
+<button type='button' class='btn btn-primary center-block'>Simpan</button>
+
 @stop

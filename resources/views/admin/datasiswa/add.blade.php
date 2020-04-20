@@ -27,6 +27,7 @@
             </tbody>
           </table>
         </div>
+        <button type='button' class='btn btn-primary center-block'> Simpan </button>
       </div>
 
      </section>

@@ -162,6 +162,7 @@
             </tbody>
           </table>
         </div>
+        <a href="#" class="btn btn-info active right" role="button" aria-pressed="true">Keluar</a>
       </div>
 
      </section>
