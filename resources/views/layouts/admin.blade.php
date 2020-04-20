@@ -166,11 +166,10 @@
                         <!-- /.nav-second-level -->
                     </li>
                    
-                    <li>
+                    <!-- <li>
                         <a href="{{ url('/keluar') }}"><i class="fa fa-wrench fa-fw"></i>Keluar</a>
                        
-                        <!-- /.nav-second-level -->
-                    </li>
+                    </li> -->
                 </ul>
 
 
