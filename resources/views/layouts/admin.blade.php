@@ -47,7 +47,31 @@
 
 
         <ul class="nav navbar-top-links navbar-right">
+        <!-- /.dropdown -->
+        <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
 
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
 
             
 
@@ -97,43 +121,17 @@
                         </div>
                         /input-group
                     </li> -->
-                    
-                    <!-- /.dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                            document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                            </a>
-
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                @csrf
-                                            </form>
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-user -->
-                    </li>
-                    <!-- /.dropdown -->
                     <li>
                         <a href="{{route('dashboard.index')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
 
                     <li>
-                        <a href="{{ url('/datasiswa') }}"><i class="fa fa-wrench fa-fw"></i>Data Siswa</a>
+                        <a href="{{ url('/datasiswa') }}"><i class="fa fa-user fa-fw"></i> Data Siswa</a>
                         <!-- /.nav-second-level -->
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Transaksi<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-money fa-fw"></i> Transaksi<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="{{route('setoran.index')}}">Setoran</a>
@@ -149,19 +147,19 @@
 
 
                     <li>
-                        <a href="{{ url('/laporan') }}"><i class="fa fa-wrench fa-fw"></i>Laporan</a>
+                        <a href="{{ url('/laporan') }}"><i class="fa fa-print fa-fw"></i> Laporan Transaksi</a>
                         
                         <!-- /.nav-second-level -->
                     </li>
 
 
                     <li>
-                        <a href="{{ url('/jurnalumum') }}"><i class="fa fa-wrench fa-fw"></i>Jurnal Umum</span></a>
+                        <a href="{{ url('/jurnalumum') }}"><i class="fa fa-book fa-fw"></i> Jurnal Umum</span></a>
                         <!-- /.nav-second-level -->
                     </li>
 
                     <li>
-                        <a href="{{route('keterampilan.index')}}"><i class="fa fa-wrench fa-fw"></i>Keterampilan</a>
+                        <a href="{{route('keterampilan.index')}}"><i class="fa fa-star-half-o fa-fw"></i> Keterampilan</a>
                        
                         <!-- /.nav-second-level -->
                     </li>
