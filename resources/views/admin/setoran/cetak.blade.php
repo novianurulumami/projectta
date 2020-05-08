@@ -63,11 +63,10 @@
 </div>
 <!-- <div class="form-group row">
     <div class="col-md-8 offset-md-4">
-        <button type="submit" class="btn btn-primary btn-md">Simpan
-        </button>
+        <a href="#" class="btn btn-primary" role="button" aria-pressed="true">Simpan</a>
+        <a href="#" class="btn btn-primary" role="button" aria-pressed="true">Cetak</a>
     </div>
 </div> -->
 <br></br>
-<a href="{{route('setorancetak.index')}}" class="btn btn-primary" role="button" aria-pressed="true">Simpan</a>
-<!-- <button href="{{route('setorancetak.index')}}" type="button" class="btn btn-primary center-block">Simpan</button> -->
+<button type='button' class='btn btn-primary center-block'>Cetak</button>
 @stop

@@ -31,4 +31,6 @@ Route::get('/home', 'AdminUsersController@index')->name('home');
     Route::resource('export', 'ExportController');
     Route::resource('setoran', 'SetoranController');
     Route::resource('penarikan', 'PenarikanController');
+    Route::resource('setorancetak', 'SetoranCetakController');
+    Route::resource('penarikancetak', 'PenarikanCetakController');
 

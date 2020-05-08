@@ -1,5 +1,23 @@
 @extends('layouts.admin')
 @section('content')
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+
+</head>
+
+<body>
+
+
+
 <h3>Laporan Transaksi</h3>
 <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -17,7 +35,7 @@
                        
                       <div class="input-group">
                           <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
-                            <input type="text" class="form-control " id="tanggal"  value="01-05-2020"  name="tanggal1"  >
+                            <input type="text" class="date form-control" >
                       </div>
 
                       </div>
@@ -27,7 +45,7 @@
                       <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 8px;">
                         <div class="input-group">
                           <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
-                            <input type="text" class="form-control " value="01-05-2020" id="tanggal2"   name="tanggal2"  >
+                            <input type="text" class="date form-control" >
                       </div>
                       </div>
                       <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 8px;">
@@ -45,4 +63,52 @@
     <div class="x_panel">
     </div>
     </div>
+    <div class="form-group row">
+    <label for="email" class="col-md-4 col-form-label font-weight-normal"><h5>Saldo Awal</h5></label>
+    <div class="col-md-4">
+        <input id="" type="email" class="form-control " name="email" value="" required autocomplete="email" autofocus>
+    </div>
+    <label for="email" class="col-md-4 col-form-label font-weight-normal"><h5>Total Debit</h5></label>
+    <div class="col-md-4">
+        <input id="" type="email" class="form-control " name="email" value="" required autocomplete="email" autofocus>
+    </div>
+    <label for="email" class="col-md-4 col-form-label font-weight-normal"><h5>Total Kredit</h5></label>
+    <div class="col-md-4">
+        <input id="" type="email" class="form-control " name="email" value="" required autocomplete="email" autofocus>
+    </div>
+    <label for="email" class="col-md-4 col-form-label font-weight-normal"><h5>Saldo Akhir</h5></label>
+    <div class="col-md-4">
+        <input id="" type="email" class="form-control " name="email" value="" required autocomplete="email" autofocus>
+    </div>
+    </div>
+    <div class="box-body">
+          <table class="table table-stripped table-bordered">
+            <thread>
+              <tr>
+                <th>NIS</th>
+                <th>NAMA SISWA</th>
+                <th>KELAS</th>
+                <th>JENIS TRANSAKSI</th>
+                <th>DEBIT</th>
+                <th>KREDIT</th>
+                <th>SALDO</th>
+            </thread>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        <button type='button' class='btn btn-primary center-block'> Cetak </button>
+<script type="text/javascript">
+
+    $('.date').datepicker({  
+
+       format: 'mm-dd-yyyy'
+
+     });  
+
+</script>  
+
+
+
+</body
 @stop

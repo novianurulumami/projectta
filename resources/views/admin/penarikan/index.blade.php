@@ -62,6 +62,8 @@
     </div>
 </div>
 <br></br>
-<button type='button' class='btn btn-primary center-block'>Simpan</button>
+<a href="{{route('penarikancetak.index')}}" class="btn btn-primary" role="button" aria-pressed="true">Simpan</a>
+
+<!-- <button type='button' class='btn btn-primary center-block'>Simpan</button> -->
 
 @stop
