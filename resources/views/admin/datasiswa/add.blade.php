@@ -120,7 +120,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"> SMK PGRI ROGOJAMPI</h5>
+            <h5 class="modal-title" id="exampleModalLabel">TAMBAH DATA SISWA</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -156,7 +156,7 @@
                                           <option value="115">XII</option>
                                 </select>
             </div>
-            
+
             <div class="form-group">
               <label >PILIH JURUSAN</label>
               <select class="form-control required" name="groupuser" id="groupuser" required>
@@ -181,7 +181,7 @@
 
             <div class="form-group">
             
-              <label >PILIH ANGKA</label>
+              <label >PILIH JENIS KELAMIN</label>
               <select class="form-control required" name="groupuser" id="groupuser" required>
                                          <option value="113">LAKI-LAKI</option>
                                           <option value="114">PEREMPUAN</option>
@@ -203,7 +203,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary buttonsave" value="save"><i class="fa fa-save"></i> Save</button>
+            <button type="submit" class="btn btn-primary buttonsave" value="save"><i class="fa fa-save"></i> Simpan</button>
           </div>
           </form>
             
