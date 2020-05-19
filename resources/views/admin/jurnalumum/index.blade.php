@@ -76,6 +76,7 @@
                        <label for="nama">jurnal</label>
                      <div class="well" style="overflow: auto">
                       <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 8px;">
+                      
                         <table class="table table-stripped table-bordered">
                             <thread>
                             <tr>
