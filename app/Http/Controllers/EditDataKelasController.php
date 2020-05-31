@@ -13,8 +13,9 @@ class EditDataKelasController extends Controller
      */
     public function index()
     {
-        //
-        return view('admin.datasiswa.editdata');
+        $data_siswa = \App\Siswa::all();
+        return view('admin.datasiswa.editdata' , ['data_siswa' => $data_siswa]);
+    
     }
 
     /**

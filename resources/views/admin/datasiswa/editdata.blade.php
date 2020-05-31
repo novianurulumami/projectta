@@ -111,116 +111,38 @@
          <!-- Button trigger modal -->
          <h3>Edit Data Kelas</h3>
         </div>
-        <div class="dropdown">
-            <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-info active" data-target="#" href="/page.html">
-                Jurusan <span class="caret"></span>
-            </a>
-    		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-            <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Akuntansi</a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown-submenu">
-                    <a href="#">X AK</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    	<li><a href="#">4</a></li>
-                    </ul>
-                    <a href="#">XI AK</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    	<li><a href="#">4</a></li>
-                    </ul>
-                    <a href="#">XII AK</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    	<li><a href="#">4</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Multimedia</a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown-submenu">
-                    <a href="#">X MM</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                    	<li><a href="#">2</a></li>
-                    </ul>
-                    <a href="#">XI MM</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                    	<li><a href="#">2</a></li>
-                    </ul>
-                    <a href="#">XII MM</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                    	<li><a href="#">2</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Pemasaran</a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown-submenu">
-                    <a href="#">X PM</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                    </ul>
-                    <a href="#">XI PM</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                    </ul>
-                    <a href="#">XII PM</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Perkantoran</a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown-submenu">
-                    <a href="#">X AP</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    	<li><a href="#">4</a></li>
-                    </ul>
-                    <a href="#">XI AP</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    	<li><a href="#">4</a></li>
-                    </ul>
-                    <a href="#">XII AP</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    	<li><a href="#">4</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-        </div>
+        <ul class="nav nav-tabs">
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Kelas
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">X</a></li>
+          <li><a href="#">XI</a></li>
+          <li><a href="#">XII</a></li> 
+        </ul>
+      </li>
+      <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Jurusan
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Akuntansi</a></li>
+          <li><a href="#">Multimedia</a></li>
+          <li><a href="#">Pemasaran</a></li> 
+          <li><a href="#">Perkantoran</a></li> 
+        </ul>
+      </li>
+      <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Angka
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li> 
+          <li><a href="#">4</a></li> 
+          <li><a href="#">5</a></li> 
+        </ul>
+      </li>
+    </ul>
         <br></br>
         <a href="#" class="btn btn-info active right" role="button" data-toggle="modal" data-target="#exampleModal" onclick="refresh()">Edit Kelas</a>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -287,16 +209,25 @@
          </div>
       </div>
       <div class="box-body">
-          <table class="table table-stripped table-bordered">
+          <table class="table table-hover table-stripped table-bordered">
             <thread>
               <tr>
-                <th> </th>
-                <th>NO</th>
                 <th>KELAS</th>
+                <th>JURUSAN</th>
+                <th>ANGKA</th>
                 <th>NIS</th>
                 <th>NAMA SISWA</th>
               </tr>
             </thread>
+            @foreach($data_siswa as $datasiswa)
+              <tr>
+              <td>{{$datasiswa->kelas}}</td>
+              <td>{{$datasiswa->jurusan}}</td>
+              <td>{{$datasiswa->angka}}</td>
+              <td>{{$datasiswa->nis}}</td>
+              <td>{{$datasiswa->nama}}</td>
+              </tr>
+            @endforeach
             <tbody>
             </tbody>
           </table>

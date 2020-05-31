@@ -13,8 +13,8 @@
 <table class="table table-hover table-stripped table-bordered" >
             <thread>
               <tr>
-                <th>NO ID</th>
                 <th>NIS</th>
+                <th>NO REKENING</th>
                 <th>NAMA SISWA</th>
                 <th>KELAS</th>
                 <th>THN ANGKATAN</th>
@@ -25,8 +25,8 @@
             </thread>
             @foreach($data_siswa as $datasiswa)
               <tr>
-              <td>{{$datasiswa->id}}</td>
               <td>{{$datasiswa->nis}}</td>
+              <td>{{$datasiswa->no_rekening}}</td>
               <td>{{$datasiswa->nama}}</td>
               <td>{{$datasiswa->kelas}}</td>
               <td>{{$datasiswa->tahun_angkatan}}</td>
@@ -57,6 +57,11 @@
           <input type="text" class="form-control" name="nis" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="NIS">
         </div>
         
+        <div class="form-group">
+          <label for="exampleInputEmail1">NO REKENING</label>
+          <input type="text" class="form-control" name="no_rekening" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="NO REKENING">
+        </div>
+
         <div class="form-group">
           <label for="exampleInputEmail1">Nama Lengkap</label>
           <input name="nama" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Lengkap">
