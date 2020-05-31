@@ -18,7 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'AdminUsersController@index')->name('home');
-
+Route::get('/tambah', 'TambahDataSiswaController@index')->name('tambah');
+Route::post('/tambahdata', 'TambahDataSiswaController@create')->name('tambahdata');
+   
 
     Route::resource('dashboard', 'DashboardController');
     Route::resource('datasiswa', 'DataSiswaController');
@@ -33,4 +35,5 @@ Route::get('/home', 'AdminUsersController@index')->name('home');
     Route::resource('penarikan', 'PenarikanController');
     Route::resource('setorancetak', 'SetoranCetakController');
     Route::resource('penarikancetak', 'PenarikanCetakController');
+    
 

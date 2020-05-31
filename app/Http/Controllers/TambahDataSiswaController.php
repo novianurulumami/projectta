@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DataSiswaController extends Controller
+class TambahDataSiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,9 @@ class DataSiswaController extends Controller
      */
     public function index()
     {
-        return view('admin.datasiswa.index');
+        //
+        $data_siswa = \App\Siswa::all();
+        return view('admin.datasiswa.add', ['data_siswa' => $data_siswa]);
     }
 
     /**
@@ -21,10 +23,10 @@ class DataSiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
-        
+        \App\Siswa::create($request->all());
+        return redirect('tambah');
     }
 
     /**
@@ -58,7 +60,6 @@ class DataSiswaController extends Controller
     public function edit($id)
     {
         //
-        
     }
 
     /**
