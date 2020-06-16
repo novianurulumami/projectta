@@ -21,49 +21,49 @@
         <br/><br/>
     <ul class="nav nav-tabs">
       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Kelas
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">X</a></li>
-          <li><a href="#">XI</a></li>
-          <li><a href="#">XII</a></li> 
-        </ul>
+        <select name="angka" class="form-control" id="exampleFormControlSelect1">
+          <option><a href="#">X</a></option>
+          <option><a href="#">XI</a></option>
+          <option><a href="#">XII</a></option>
+        </select>
       </li>
       <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Jurusan
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Akuntansi</a></li>
-          <li><a href="#">Multimedia</a></li>
-          <li><a href="#">Pemasaran</a></li> 
-          <li><a href="#">Perkantoran</a></li> 
-        </ul>
+        <select name="angka" class="form-control" id="exampleFormControlSelect1">
+          <option>Akuntansi</option>
+          <option>Multimedia</option>
+          <option>Pemasaran</option>
+          <option>Perkantoran</option>
+        </select>
       </li>
       <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Angka
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li> 
-          <li><a href="#">4</a></li> 
-          <li><a href="#">5</a></li> 
-        </ul>
+        <select name="angka" class="form-control" id="exampleFormControlSelect1">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+        </select>
       </li>
+      <button class="btn btn-default" type="button">
+        <i class="fa fa-search"></i>
     </ul>
 
             <br/><br/>
+            <form action="{{url('datasiswa')}}" method="GET">
             <div class="sidebar-search">
                         <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Search...">
+                            <input type="text" name="cari" class="form-control" placeholder="Search..." value="{{ old('cari') }}">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
+                                    <button class="btn btn-default"  type="submit" value="CARI">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
                             </input>
                         </div>
             </div>
+          </form>
+            
         </div>
         <section class="content">
         <div class="box">  
@@ -76,31 +76,28 @@
               <tr>
                 <th>NAMA SISWA</th>
                 <th>KELAS</th>
+                <th>JURUSAN</th>
+                <th>ANGKA</th>
                 <th>NO REKENING</th>
                 <th>JUMLAH SALDO</th>
                 <th>AKSI</th>
               </tr>
             </thread>
+            @foreach($data_siswa as $datasiswa)
+              <tr>
+              <td>{{$datasiswa->nama}}</td>
+              <td>{{$datasiswa->nama_kelas}}</td>
+              <td>{{$datasiswa->jurusan}}</td>
+              <td>{{$datasiswa->angka}}</td>
+              <td>{{$datasiswa->no_rekening}}</td>
+              </tr>
+            @endforeach
             <tbody>
             </tbody>
           </table>
+      {{ $data_siswa->links() }}
         </div>
       </div>
-        <nav aria-label="...">
-        <ul class="pagination">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item active">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-      </nav>
     </section>
     </div>
 </div>

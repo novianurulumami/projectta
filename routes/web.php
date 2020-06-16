@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'AdminUsersController@index')->name('home');
 Route::get('/tambah', 'TambahDataSiswaController@index')->name('tambah');
+Route::get('/cari', 'DataSiswaController@cari')->name('cari');
 Route::post('/tambahdata', 'TambahDataSiswaController@create')->name('tambahdata');
    
 

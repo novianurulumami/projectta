@@ -8,6 +8,11 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> <i class="fa fa-plus"></i>   Tambah Data </button>
 <br></br>
+    @if(session('sukses'))
+        <div class="alert alert-success" role="alert">
+        {{session('sukses')}}
+        </div>
+    @endif
 </div>
 <div class="box-body">
 <table class="table table-hover table-stripped table-bordered" >
@@ -17,10 +22,11 @@
                 <th>NO REKENING</th>
                 <th>NAMA SISWA</th>
                 <th>KELAS</th>
+                <th>JURUSAN</th>
+                <th>ANGKA</th>
                 <th>THN ANGKATAN</th>
                 <th>JENIS KELAMIN</th>
-                <th>ALAMAT</th>
-                <th>NO. TELP</th>
+                <th>AKSI</th>
               </tr>
             </thread>
             @foreach($data_siswa as $datasiswa)
@@ -28,11 +34,13 @@
               <td>{{$datasiswa->nis}}</td>
               <td>{{$datasiswa->no_rekening}}</td>
               <td>{{$datasiswa->nama}}</td>
-              <td>{{$datasiswa->kelas}}</td>
+              <td>{{$datasiswa->nama_kelas}}</td>
+              <td>{{$datasiswa->nama_jurusan}}</td>
+              <td>{{$datasiswa->angka}}</td>
               <td>{{$datasiswa->tahun_angkatan}}</td>
               <td>{{$datasiswa->jenis_kelamin}}</td>
-              <td>{{$datasiswa->alamat}}</td>
-              <td>{{$datasiswa->no_telepon}}</td>
+              <td> <a href=""><i class="fa fa-info-circle"></i></a>  | 
+              <a href=""> <i class="fa fa-trash"></i> </a> </a>  </td>
               </tr>
             @endforeach
           </table>
@@ -75,19 +83,18 @@
         <div class="form-group">
           <label for="exampleFormControlSelect1">Pilih Kelas</label>
           <select name="kelas" class="form-control" id="exampleFormControlSelect1">
-            <option>X</option>
-            <option>XI</option>
-            <option>XII</option>
+            @foreach ($kelas as $item)
+              <option value="{{$item->id_kelas}}"> {{$item->nama_kelas}}</option>
+            @endforeach
           </select>
         </div>
         
         <div class="form-group">
           <label for="exampleFormControlSelect1">Pilih Jurusan</label>
           <select name="jurusan" class="form-control" id="exampleFormControlSelect1">
-            <option>AKUNTANSI</option>
-            <option>MULTIMEDIA</option>
-            <option>PEMASARAN</option>
-            <option>PERKANTORAN</option>
+            @foreach ($jurusan as $item)
+              <option value="{{$item->id_jurusan}}"> {{$item->nama_jurusan}}</option>
+            @endforeach
           </select>
         </div>
 

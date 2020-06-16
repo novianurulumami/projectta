@@ -107,7 +107,7 @@
 
 
 
-        <div class="navbar-default sidebar navbar-static-top" role="navigation">
+        <div class="navbar-default sidebar navbar-static-top" role="navigation" style="font-size:15px">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <!-- <li class="sidebar-search">

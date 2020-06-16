@@ -14,8 +14,12 @@ class TambahDataSiswaController extends Controller
     public function index()
     {
         //
-        $data_siswa = \App\Siswa::all();
-        return view('admin.datasiswa.add', ['data_siswa' => $data_siswa]);
+        $data_siswa = \App\Siswa::join('kelas1','kelas1.id_kelas','=','siswa1.kelas')
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->get();
+        $kelas = \App\Kelas::all();
+        $jurusan = \App\Jurusan::all();
+        return view('admin.datasiswa.add', ['data_siswa' => $data_siswa, 'kelas' => $kelas, 'jurusan' => $jurusan]);
     }
 
     /**
@@ -26,7 +30,8 @@ class TambahDataSiswaController extends Controller
     public function create(Request $request)
     {
         \App\Siswa::create($request->all());
-        return redirect('tambah');
+        return redirect('tambah')->with('sukses', 'Data Berhasil Diinput');
+        
     }
 
     /**

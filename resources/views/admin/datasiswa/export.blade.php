@@ -2,10 +2,10 @@
 @section('content')
 <h3>Eksport Data</h3>
 <br></br>
-<form class="form-inline">
-  <select class="custom-select" id="inlineFormCustomSelectPref">
-    <option selected>Choose...</option>
-  </select>
-  <label class="my-1 mr-2" for="inlineFormCustomSelectPref">No Choose File</label>
+<form>
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Example file input</label>
+    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+  </div>
 </form>
 @stop

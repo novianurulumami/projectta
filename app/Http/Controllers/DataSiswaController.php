@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Kelas;
+use Illuminate\Support\Facades\DB;
 
 class DataSiswaController extends Controller
 {
@@ -11,9 +13,18 @@ class DataSiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.datasiswa.index');
+		$cari = $request->cari;
+
+        $data_siswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas');
+        if(!empty($request->cari)){
+            $data_siswa = $data_siswa->where('nama','like',"%".$cari."%");
+        }
+        $data_siswa = $data_siswa->paginate(2);
+        return view('admin.datasiswa.index', ['data_siswa' => $data_siswa->appends(['cari' => $request->cari])]);
+        
+
     }
 
     /**
@@ -83,4 +94,18 @@ class DataSiswaController extends Controller
     {
         //
     }
+
+    public function cari(Request $request)
+	{
+		// menangkap data pencarian
+		$cari = $request->cari;
+ 
+    		// mengambil data dari table pegawai sesuai pencarian data
+        $data_siswa = \App\Siswa::where('nama','like',"%".$cari."%")
+		->paginate();
+ 
+    		// mengirim data pegawai ke view index
+        return view('admin.datasiswa.index', ['data_siswa' => $data_siswa]);
+
+	}
 }
