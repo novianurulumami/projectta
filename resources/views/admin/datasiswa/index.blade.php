@@ -14,7 +14,8 @@
     <div class="row">
         <h3>Data Siswa</h3>
         <div class="col-4">
-            <a href="{{route('tambah')}}" class="btn btn-info active" role="button" aria-pressed="true"><i class="fa fa-plus"></i>   Tambah Data</a>
+            <a href="{{route('tambah')}}" class="btn btn-info active" role="button" aria-pressed="true"><i class="fa fa-plus"></i>   Tambah Data Siswa</a>
+            <a href="{{route('tambahkelas')}}" class="btn btn-info active" role="button" aria-pressed="true"><i class="fa fa-plus"></i>   Tambah Data Kelas</a>
             <a href="{{route('datakelas.index')}}" class="btn btn-info active" role="button" aria-pressed="true"> <i class="fa fa-edit"></i>   Edit Data Kelas</a>
             <a href="{{route('import.index')}}" class="btn btn-info active" role="button" aria-pressed="true">Import Data</a>
             <a href="{{route('export.index')}}" class="btn btn-info active" role="button" aria-pressed="true">Export Data</a>
@@ -87,9 +88,13 @@
               <tr>
               <td>{{$datasiswa->nama}}</td>
               <td>{{$datasiswa->nama_kelas}}</td>
-              <td>{{$datasiswa->jurusan}}</td>
-              <td>{{$datasiswa->angka}}</td>
+              <td>{{$datasiswa->nama_jurusan}}</td>
+              <td>{{$datasiswa->nama_angka}}</td>
               <td>{{$datasiswa->no_rekening}}</td>
+              <td></td>
+              <td> <a href="{{route('detaildatasiswa', $datasiswa->id, 'detail')}}"><i class="fa fa-info-circle"></i></a>  | 
+              <a href="{{route('editdata', $datasiswa->id, 'edit')}}"><i class="fa fa-edit"></i></a>   |
+              <a href="{{route('hapusdata', $datasiswa->id, 'delete')}}"> <i class="fa fa-trash"></i> </a></td>
               </tr>
             @endforeach
             <tbody>

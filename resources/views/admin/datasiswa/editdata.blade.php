@@ -20,88 +20,6 @@
         }
     </style>
 </head>
-<div class="content-wrapper">
-    <script>
-    $(document).ready(function(e){
-
-      $('.formpengguna').submit(function(){
-
-        var pengguna = $(".required").filter(function() { return $(this).val() === ''; });
-        console.log(pengguna.length);
-        
-
-        if (pengguna.length == 0 ) {
-
-          $.ajax({
-              url : $(this).attr('action'),
-
-              data : $(this).serialize(),
-              type : 'post',
-              cache : false,
-              dataType : 'json',
-              beforeSend : function(){
-                $('.buttonsave').attr('disabled', 'disabled');
-                $('.buttonsave').html('<i class="fa fa-spin fa-spinner"></i> Sedang Proses');
-              },
-              complete: function(){
-                 $('.buttonsave').removeAttr('disabled');
-                 $('.buttonsave').html('<i class="fa fa-save"></i> Save');
-              },
-              error: function(e){
-                swal('Error', e, 'error');
-              },
-              success: function(data){
-
-                 $("[data-dismiss=modal]").trigger({ type: "click" });
-                 swal({
-                        title: "Are you sure?",
-                        text: "Data Berhasil Di Input!",
-                        type: "success"
-                      },
-                       function(){
-                          window.location = "http://localhost/trystore/index.php/menu/pengguna";
-                    
-                  });
-                 
-              } 
-            });
-
-         }else{
-
-          swal({
-            type: 'error',
-            title: 'Oops...',
-            text: 'Anda harus mengisi data dengan lengkap !',
-          })
-            // alert('Anda harus mengisi data dengan lengkap !');
-        }
-          return false;
-
-      })
-
-     })
- </script>
-
-
-
- <script>
-   function select_data($id,$nama_lengkap,$username,$password,$groupuser){
-    $("#id").val($id);
-     $("#nama_lengkap").val($nama_lengkap);
-      $("#username").val($username);
-      $("#password").val($password);
-       $("#id_groupuser").val($groupuser);
-   }
-
-   function refresh() {
-    $("#id").val("");
-     $("#nama_lengkap").val("");
-     $("#username").val("");
-     $("#password").val("");
-     $("#id_groupuser").val("");
-   }
-
- </script>
 
 <section class="content">
 
@@ -166,7 +84,7 @@
                                          <option value="113">X</option>
                                           <option value="114">XI</option>
                                           <option value="115">XII</option>
-                                </select>
+              </select>
             </div>
 
             <div class="form-group">
@@ -176,7 +94,7 @@
                                           <option value="114">MULTIMEDIA</option>
                                           <option value="115">PEMASARAN</option>
                                           <option value="116">PERKANTORAN</option>
-                                </select>
+              </select>
             </div>
 
             <div class="form-group">
@@ -188,7 +106,7 @@
                                           <option value="116">4</option>
                                           <option value="115">5</option>
                                           <option value="116">6</option>
-                                </select>
+              </select>
             </div>
 
             </div>
@@ -221,9 +139,9 @@
             </thread>
             @foreach($data_siswa as $datasiswa)
               <tr>
-              <td>{{$datasiswa->kelas}}</td>
-              <td>{{$datasiswa->jurusan}}</td>
-              <td>{{$datasiswa->angka}}</td>
+              <td>{{$datasiswa->nama_kelas}}</td>
+              <td>{{$datasiswa->nama_jurusan}}</td>
+              <td>{{$datasiswa->nama_angka}}</td>
               <td>{{$datasiswa->nis}}</td>
               <td>{{$datasiswa->nama}}</td>
               </tr>
@@ -231,22 +149,9 @@
             <tbody>
             </tbody>
           </table>
+          {{ $data_siswa->links() }}
         </div>
-        <nav aria-label="...">
-        <ul class="pagination">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item active">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-      </nav>
+        
         <a href="#" class="btn btn-info active right" role="button" aria-pressed="true">Keluar</a>
       </div>
       

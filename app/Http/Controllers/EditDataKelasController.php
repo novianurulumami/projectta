@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EditDataKelasController extends Controller
 {
@@ -11,11 +12,23 @@ class EditDataKelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data_siswa = \App\Siswa::all();
-        return view('admin.datasiswa.editdata' , ['data_siswa' => $data_siswa]);
-    
+        $cari = $request->cari;
+
+        $data_siswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('kelasmeta','kelasmeta.id_kelasmeta','=','siswa1.angka');
+        if(!empty($request->cari)){
+            $data_siswa = $data_siswa->where('nama','like',"%".$cari."%");
+        }
+        $data_siswa = $data_siswa->paginate(5);
+        $kelas = \App\Kelas::all();
+        $jurusan = \App\Jurusan::all();
+        $kelasmeta = \App\KelasMeta::all();
+        return view('admin.datasiswa.editdata', ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]), 'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
+        
+
     }
 
     /**

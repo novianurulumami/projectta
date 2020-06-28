@@ -1,7 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-@extends('layouts.admin')
-@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,136 +28,69 @@
          <!-- Button trigger modal -->
          <h3>Keterampilan</h3>
         </div>
-        <div class="dropdown">
-            <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-info active" data-target="#" href="/page.html">
-                Jurusan <span class="caret"></span>
-            </a>
-    		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-            <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Akuntansi</a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown-submenu">
-                    <a href="#">X AK</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    	<li><a href="#">4</a></li>
-                    </ul>
-                    <a href="#">XI AK</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    	<li><a href="#">4</a></li>
-                    </ul>
-                    <a href="#">XII AK</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    	<li><a href="#">4</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Multimedia</a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown-submenu">
-                    <a href="#">X MM</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                    	<li><a href="#">2</a></li>
-                    </ul>
-                    <a href="#">XI MM</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                    	<li><a href="#">2</a></li>
-                    </ul>
-                    <a href="#">XII MM</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                    	<li><a href="#">2</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Pemasaran</a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown-submenu">
-                    <a href="#">X PM</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                    </ul>
-                    <a href="#">XI PM</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                    </ul>
-                    <a href="#">XII PM</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Perkantoran</a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown-submenu">
-                    <a href="#">X AP</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    	<li><a href="#">4</a></li>
-                    </ul>
-                    <a href="#">XI AP</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    	<li><a href="#">4</a></li>
-                    </ul>
-                    <a href="#">XII AP</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    	<li><a href="#">4</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-        </div>
+        <ul class="nav nav-tabs">
+          <li class="dropdown">
+            <select name="angka" class="form-control" id="exampleFormControlSelect1">
+              <option><a href="#">X</a></option>
+              <option><a href="#">XI</a></option>
+              <option><a href="#">XII</a></option>
+            </select>
+          </li>
+          <li class="dropdown">
+            <select name="angka" class="form-control" id="exampleFormControlSelect1">
+              <option>Akuntansi</option>
+              <option>Multimedia</option>
+              <option>Pemasaran</option>
+              <option>Perkantoran</option>
+            </select>
+          </li>
+          <li class="dropdown">
+            <select name="angka" class="form-control" id="exampleFormControlSelect1">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+            </select>
+          </li>
+          <button class="btn btn-default" type="button">
+            <i class="fa fa-search"></i>
+        </ul>
         <br></br>
         <div class="box-body">
           <table class="table table-stripped table-bordered">
             <thread>
               <tr>
-                <th>NO ID</th>
                 <th>NIS</th>
+                <th>NO REKENING</th>
                 <th>KELAS</th>
+                <th>JURUSAN</th>
+                <th>ANGKA</th>
                 <th>NAMA SISWA</th>
-                <th>KETERAMPILAN</th>
+                <th>NILAI KETERAMPILAN</th>
                 <th>AKSI</th>
             </thread>
+            @foreach($data_siswa as $datasiswa)
+              <tr>
+              <td>{{$datasiswa->nis}}</td>
+              <td>{{$datasiswa->no_rekening}}</td>
+              <td>{{$datasiswa->nama_kelas}}</td>
+              <td>{{$datasiswa->nama_jurusan}}</td>
+              <td>{{$datasiswa->nama_angka}}</td>
+              <td>{{$datasiswa->nama}}</td>
+              <td></td>
+              <td> <a href="{{route('editnilai', $datasiswa->id, 'edit')}}"><i class="fa fa-edit"></i></a>   |
+              <a href="{{route('hapusnilai', $datasiswa->id, 'delete')}}"> <i class="fa fa-trash"></i> </a></td>
+              </tr>
+            @endforeach
             <tbody>
             </tbody>
           </table>
+          {{ $data_siswa->links() }}
+        <button type='button' class='btn btn-primary center-block'>Cetak</button>
         </div>
       </div>
-      <br></br>
-        <button type='button' class='btn btn-primary center-block'>Cetak</button>
      </section>
 </html>
-@stop
 @stop

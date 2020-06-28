@@ -9,9 +9,5 @@
   </div>
 </form>
 <br></br>
-<form action="{{route('cari')}}" method="GET">
-  <input type="text" name="cari" placeholder="Cari Nama Siswa ...." value="{{ old('cari') }}">
-  <input type="submit" value="CARI">
-</form>
 <button type='button' class='btn btn-primary center-block'>Simpan</button>
 @stop

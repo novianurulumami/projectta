@@ -3,33 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Kelas;
-use Illuminate\Support\Facades\DB;
 
-class DataSiswaController extends Controller
+class TambahDataKelasController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-		$cari = $request->cari;
 
-        $data_siswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        $data_siswa = \App\Siswa::join('kelas1','kelas1.id_kelas','=','siswa1.kelas')
         ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
-        ->join('kelasmeta','kelasmeta.id_kelasmeta','=','siswa1.angka');
-        if(!empty($request->cari)){
-            $data_siswa = $data_siswa->where('nama','like',"%".$cari."%");
-        }
-        $data_siswa = $data_siswa->paginate(5);
-        $kelas = \App\Kelas::all();
-        $jurusan = \App\Jurusan::all();
-        $kelasmeta = \App\KelasMeta::all();
-        return view('admin.datasiswa.index', ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]), 'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
-        
-
+        ->join('kelasmeta','kelasmeta.id_kelasmeta','=','siswa1.angka')
+        ->get();
+        $data_kelas = \App\Kelas::all();
+        $data_jurusan = \App\Jurusan::all();
+        $data_kelasmeta = \App\KelasMeta::all();
+        return view('admin.datasiswa.addkelas', ['data_kelas' => $data_kelas, 'data_jurusan' => $data_jurusan, 'data_kelasmeta' => $data_kelasmeta]);
     }
 
     /**
@@ -37,12 +29,19 @@ class DataSiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
         
+        \App\Jurusan::create($request->all());
+        return redirect('tambahjurusan')->with('sukses', 'Data Berhasil Diinput');
     }
 
+    public function create1(Request $request)
+    {
+        
+        \App\KelasMeta::create($request->all());
+        return redirect('tambahjurusan')->with('sukses', 'Data Berhasil Diinput');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -74,7 +73,6 @@ class DataSiswaController extends Controller
     public function edit($id)
     {
         //
-        
     }
 
     /**
@@ -99,18 +97,4 @@ class DataSiswaController extends Controller
     {
         //
     }
-
-    // public function cari(Request $request)
-	// {
-	// 	// menangkap data pencarian
-	// 	$cari = $request->cari;
- 
-    // 		// mengambil data dari table pegawai sesuai pencarian data
-    //     $data_siswa = \App\Siswa::where('nama','like',"%".$cari."%")
-	// 	->paginate();
- 
-    // 		// mengirim data pegawai ke view index
-    //     return view('admin.datasiswa.index', ['data_siswa' => $data_siswa]);
-
-	// }
 }

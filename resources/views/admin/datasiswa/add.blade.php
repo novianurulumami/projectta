@@ -6,6 +6,7 @@
 </div>
 <div class="col-6">
 <!-- Button trigger modal -->
+<br></br>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> <i class="fa fa-plus"></i>   Tambah Data </button>
 <br></br>
     @if(session('sukses'))
@@ -36,14 +37,16 @@
               <td>{{$datasiswa->nama}}</td>
               <td>{{$datasiswa->nama_kelas}}</td>
               <td>{{$datasiswa->nama_jurusan}}</td>
-              <td>{{$datasiswa->angka}}</td>
+              <td>{{$datasiswa->nama_angka}}</td>
               <td>{{$datasiswa->tahun_angkatan}}</td>
               <td>{{$datasiswa->jenis_kelamin}}</td>
-              <td> <a href=""><i class="fa fa-info-circle"></i></a>  | 
-              <a href=""> <i class="fa fa-trash"></i> </a> </a>  </td>
+              <td> <a href="{{route('detaildatasiswa', $datasiswa->id, 'detail')}}"><i class="fa fa-info-circle"></i></a>  | 
+              <a href="{{route('editdata', $datasiswa->id, 'edit')}}"><i class="fa fa-edit"></i></a>   |
+              <a href="{{route('hapusdata', $datasiswa->id, 'delete')}}"> <i class="fa fa-trash"></i> </a></td>
               </tr>
             @endforeach
           </table>
+          {{ $data_siswa->links() }}
           </div>
     </div>
 
@@ -101,12 +104,9 @@
         <div class="form-group">
           <label for="exampleFormControlSelect1">Pilih Angka</label>
           <select name="angka" class="form-control" id="exampleFormControlSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
+            @foreach ($kelasmeta as $item)
+              <option value="{{$item->id_kelasmeta}}"> {{$item->nama_angka}}</option>
+            @endforeach
           </select>
         </div>
 
