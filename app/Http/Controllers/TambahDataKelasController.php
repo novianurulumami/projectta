@@ -16,7 +16,7 @@ class TambahDataKelasController extends Controller
 
         $data_siswa = \App\Siswa::join('kelas1','kelas1.id_kelas','=','siswa1.kelas')
         ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
-        ->join('kelasmeta','kelasmeta.id_kelasmeta','=','siswa1.angka')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
         ->get();
         $data_kelas = \App\Kelas::all();
         $data_jurusan = \App\Jurusan::all();

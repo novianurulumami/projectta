@@ -105,7 +105,7 @@
           <label for="exampleFormControlSelect1">Pilih Angka</label>
           <select name="angka" class="form-control" id="exampleFormControlSelect1">
             @foreach ($kelasmeta as $item)
-              <option value="{{$item->id_kelasmeta}}"> {{$item->nama_angka}}</option>
+              <option value="{{$item->id_kelas_meta}}"> {{$item->nama_angka}}</option>
             @endforeach
           </select>
         </div>

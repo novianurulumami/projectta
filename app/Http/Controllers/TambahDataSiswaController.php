@@ -6,7 +6,6 @@ use App\Siswa;
 use App\Kelas;
 use App\KelasMeta;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\DB;
 
 class TambahDataSiswaController extends Controller
@@ -22,7 +21,7 @@ class TambahDataSiswaController extends Controller
 
         $data_siswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
         ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
-        ->join('kelasmeta','kelasmeta.id_kelasmeta','=','siswa1.angka');
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
         if(!empty($request->cari)){
             $data_siswa = $data_siswa->where('nama','like',"%".$cari."%");
         }

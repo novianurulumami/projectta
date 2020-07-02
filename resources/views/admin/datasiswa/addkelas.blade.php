@@ -122,7 +122,7 @@
                                     </thread>
                                     @foreach($data_kelasmeta as $datakelasmeta)
                                       <tr>
-                                      <td>{{$datakelasmeta->id_kelasmeta}}</td>
+                                      <td>{{$datakelasmeta->id_kelas_meta}}</td>
                                       <td>{{$datakelasmeta->nama_angka}}</td>
                                       <td> <a href=""><i class="fa fa-info-circle"></i></a>  | 
                                       <a href=""> <i class="fa fa-trash"></i> </a> </a>  </td>
@@ -148,6 +148,7 @@
                     <label for="exampleInputEmail1">Angka</label>
                     <input type="text" class="form-control" name="nama_angka" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="angka">
                   </div>
+
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>

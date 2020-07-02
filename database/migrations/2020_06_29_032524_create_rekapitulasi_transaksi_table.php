@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKelasMetaTable extends Migration
+class CreateRekapitulasiTransaksiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateKelasMetaTable extends Migration
      */
     public function up()
     {
-        Schema::create('kelas_meta', function (Blueprint $table) {
-            $table->bigIncrements('id_kelasmeta');
-            $table->string('angka');
+        Schema::create('rekapitulasi_transaksi', function (Blueprint $table) {
+            $table->bigIncrements('id_rekapitulasi_transaksi');
+            $table->integer('saldo_awal');
+            $table->integer('saldo_akhir');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateKelasMetaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kelas_meta');
+        Schema::dropIfExists('rekapitulasi_transaksi');
     }
 }

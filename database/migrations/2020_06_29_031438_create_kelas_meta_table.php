@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAngkaOnSiswa1Table extends Migration
+class CreateKelasMetaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class AddAngkaOnSiswa1Table extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('siswa1', function (Blueprint $table) {
-            //
-        $table->string('angka')->nullable()->after('tahun_angkatan');
+        Schema::create('kelas_meta', function (Blueprint $table) {
+            $table->bigIncrements('id_kelas_meta');
+            $table->string('nama_angka');
+            $table->timestamps();
         });
-        
     }
 
     /**
@@ -28,9 +27,6 @@ class AddAngkaOnSiswa1Table extends Migration
      */
     public function down()
     {
-        //
-        Schema::table('siswa1', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('kelas_meta');
     }
 }

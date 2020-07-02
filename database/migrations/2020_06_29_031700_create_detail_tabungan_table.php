@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRekeningOnSiswa1Table extends Migration
+class CreateDetailTabunganTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class AddRekeningOnSiswa1Table extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('siswa1', function (Blueprint $table) {
-            //
-        $table->string('no_rekening')->nullable()->after('nis');
+        Schema::create('detail_tabungan', function (Blueprint $table) {
+            $table->bigIncrements('id_detail_tabungan');
+            $table->integer('jumlah_saldo');
+            $table->timestamps();
         });
     }
 
@@ -27,9 +27,6 @@ class AddRekeningOnSiswa1Table extends Migration
      */
     public function down()
     {
-        //
-        Schema::table('siswa1', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('detail_tabungan');
     }
 }

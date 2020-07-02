@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col-md-6">
-        <form method="POST" action="{{route('updatenilai', $datasiswa->id, 'update')}}">
+        <form method="POST" action="{{route('updatenilai', $datasiswa->id_siswa, 'update')}}">
           {{csrf_field()}}
           <div class="form-group">
             <label for="exampleInputEmail1">Nilai Keterampilan</label>
