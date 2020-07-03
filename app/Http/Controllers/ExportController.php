@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Siswa;
+use Session;
+use App\Exports\SiswaExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class ExportController extends Controller
 {
@@ -14,7 +19,8 @@ class ExportController extends Controller
     public function index()
     {
         //
-        return view('admin.datasiswa.export');
+        $siswa = Siswa::all();
+        return view('admin.datasiswa.export',['siswa'=>$siswa]);
     }
 
     /**
@@ -82,4 +88,9 @@ class ExportController extends Controller
     {
         //
     }
+
+    public function export_excel()
+	{
+		return Excel::download(new SiswaExport, 'siswa.xlsx');
+	}
 }

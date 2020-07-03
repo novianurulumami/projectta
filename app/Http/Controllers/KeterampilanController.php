@@ -7,6 +7,7 @@ use App\Kelas;
 use App\KelasMeta;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use PDF;
 
 class KeterampilanController extends Controller
 {
@@ -111,5 +112,12 @@ class KeterampilanController extends Controller
         $datasiswa = \App\Siswa::find($id);
         $datasiswa->delete($datasiswa);
         return redirect('updatenilaiketerampilan')->with('sukses', 'Data Berhasil Di hapus');
+    }
+
+    public function cetak_pdf()
+    {
+        $datasiswa = \App\Siswa::all();
+    	$pdf = PDF::loadview('keterampilan_pdf', ['datasiswa' => $datasiswa]);
+    	return $pdf->download('laporan-pegawai-pdf');
     }
 }

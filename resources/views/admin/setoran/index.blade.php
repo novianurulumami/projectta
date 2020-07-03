@@ -2,6 +2,13 @@
 @section('content')
 <h3>Transaksi Setoran</h3>
 <div class="form-group row">
+    <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Tanggal Setoran</h4></label>
+   <!--  <input type="hidden" name="id" id="id"> -->
+    <div class="col-md-2">
+    <input type="text" value="<?php echo date("Y-m-d")?>" class="form-control" name="tgl_jual" aria-describedby="emailHelp" placeholder="TANGGAL JUAL" id="tgl_jual">
+    </div>
+</div>  
+<div class="form-group row">
     <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>NIS</h4></label>
     <div class="col-md-6">
         <input id="" type="email" class="form-control " name="email" value="" required autocomplete="email" autofocus>

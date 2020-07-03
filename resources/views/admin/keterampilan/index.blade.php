@@ -88,7 +88,7 @@
             </tbody>
           </table>
           {{ $data_siswa->links() }}
-        <button type='button' class='btn btn-primary center-block'>Cetak</button>
+          <a href="{{route('cetakketerampilan')}}" class="btn btn-primary" target="_blank">CETAK</a>
         </div>
       </div>
      </section>

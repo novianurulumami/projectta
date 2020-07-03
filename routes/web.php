@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'AdminUsersController@index')->name('home');
 Route::get('/tambah', 'TambahDataSiswaController@index')->name('tambah');
+Route::get('/importberhasil', 'ImportController@index')->name('importberhasil');
 Route::get('/tambahjurusan', 'TambahDataKelasController@index')->name('tambahjurusan');
 Route::get('/tambahkelas', 'TambahDataKelasController@index')->name('tambahkelas');
 Route::get('/cari', 'DataSiswaController@cari')->name('cari');
@@ -28,9 +29,11 @@ Route::get('/detaildatasiswa/{id}/detail', 'TambahDataSiswaController@show')->na
 Route::get('/editnilai/{id}/edit', 'KeterampilanController@edit')->name('editnilai');
 Route::get('/updatenilaiketerampilan', 'KeterampilanController@index')->name('updatenilaiketerampilan');
 Route::get('/hapusnilai/{id}/delete', 'KeterampilanController@delete')->name('hapusnilai');
-
+Route::get('exportdata', 'ExportController@export_excel')->name('exportdata');
+Route::get('cetakketerampilan', 'KeterampilanController@cetak_pdf')->name('cetakketerampilan');
 
 Route::post('/tambahdata', 'TambahDataSiswaController@create')->name('tambahdata');
+Route::post('/importdatasiswa', 'ImportController@import_excel')->name('importdatasiswa');
 Route::post('/tambahdatajurusan', 'TambahDataKelasController@create')->name('tambahdatajurusan');
 Route::post('/tambahdataangka', 'TambahDataKelasController@create1')->name('tambahdataangka');
 Route::post('/updatedata/{id}/update', 'TambahDataSiswaController@update')->name('updatedata');

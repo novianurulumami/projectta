@@ -4,8 +4,7 @@
 <br></br>
 <form>
   <div class="form-group">
-    <label for="exampleFormControlFile1">Example file input</label>
-    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+    <a href="{{route('exportdata')}}" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>
   </div>
 </form>
 @stop
