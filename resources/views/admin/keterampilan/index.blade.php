@@ -79,7 +79,7 @@
               <td>{{$datasiswa->nama_jurusan}}</td>
               <td>{{$datasiswa->nama_angka}}</td>
               <td>{{$datasiswa->nama}}</td>
-              <td></td>
+              <td>{{$datasiswa->nilai_siswa}}</td>
               <td> <a href="{{route('editnilai', $datasiswa->id, 'edit')}}"><i class="fa fa-edit"></i></a>   |
               <a href="{{route('hapusnilai', $datasiswa->id, 'delete')}}"> <i class="fa fa-trash"></i> </a></td>
               </tr>

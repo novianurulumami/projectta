@@ -11,11 +11,11 @@
 
     <div class="row">
         <div class="col-md-6">
-        <form method="POST" action="{{route('updatenilai', $datasiswa->id_siswa, 'update')}}">
+        <form method="POST" action="{{route('updatenilai', $datasiswa->id, 'update')}}">
           {{csrf_field()}}
           <div class="form-group">
             <label for="exampleInputEmail1">Nilai Keterampilan</label>
-          <input type="text" class="form-control" name="nis" value="{{$datasiswa->nis}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="NIS">
+          <input type="text" class="form-control" name="nilai_siswa" value="{{$datasiswa->nilai_siswa}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nilai siswa">
           </div>
           
         <div class="modal-footer">

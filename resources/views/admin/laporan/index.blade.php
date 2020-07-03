@@ -93,24 +93,21 @@
                 <th>KREDIT</th>
                 <th>SALDO</th>
             </thread>
+            @foreach($data_siswa as $datasiswa)
+              <tr>
+              <td>{{$datasiswa->nis}}</td>
+              <td>{{$datasiswa->nama}}</td>
+              <td>{{$datasiswa->nama_kelas}}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              </tr>
+            @endforeach
             <tbody>
             </tbody>
           </table>
-        </div><nav aria-label="...">
-        <ul class="pagination">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item active">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-      </nav>
+          {{ $data_siswa->links() }}
 
         <button type='button' class='btn btn-primary center-block'> Cetak </button>
 <script type="text/javascript">

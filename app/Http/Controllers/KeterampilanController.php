@@ -74,7 +74,6 @@ class KeterampilanController extends Controller
     public function edit($id)
     {
         //
-        
         $datasiswa = \App\Siswa::find($id);
         return view('admin.keterampilan.editnilaiketerampilan', ['datasiswa' => $datasiswa]);
     }
