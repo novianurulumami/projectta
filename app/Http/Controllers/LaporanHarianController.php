@@ -4,17 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class SetoranCetakController extends Controller
+use Illuminate\Support\Facades\DB;
+
+class LaporanHarianController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return view('admin.setoran.cetak');
+        $cari = $request->cari;
+        $data_siswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
+        if(!empty($request->cari)){
+            $data_siswa = $data_siswa->where('nama','like',"%".$cari."%");
+        }
+        $data_siswa = $data_siswa->paginate(5);
+        $kelas = \App\Kelas::all();
+        $jurusan = \App\Jurusan::all();
+        $kelasmeta = \App\KelasMeta::all();
+        return view('admin.laporanharian.index', ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]), 'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
+        // echo json_encode($data_siswa);
     }
 
     /**

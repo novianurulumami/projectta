@@ -40,17 +40,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{route('dashboard.index')}}">SIAPTASI</a>
+            <a style="font-size:25px" class="navbar-brand" href="{{route('dashboard.index')}}">SIAPTASI</a>
         </div>
         <!-- /.navbar-header -->
-
-
 
         <ul class="nav navbar-top-links navbar-right">
         <!-- /.dropdown -->
         <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                            <i class="fa fa-user fa-fw"></i> 
+                            <i class="hidden-xs">Admin</i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -72,16 +71,7 @@
                         <!-- /.dropdown-user -->
                     </li>
                     <!-- /.dropdown -->
-
-            
-
-
         </ul>
-
-
-
-
-
 
         {{--<ul class="nav navbar-nav navbar-right">--}}
         {{--@if(auth()->guest())--}}
@@ -104,10 +94,7 @@
         {{--</ul>--}}
 
 
-
-
-
-        <div class="navbar-default sidebar navbar-static-top" role="navigation" style="font-size:15px">
+        <div class="navbar-default sidebar navbar-static-top" role="navigation" style="font-size:17px">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <!-- <li class="sidebar-search">
@@ -131,24 +118,33 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-money fa-fw"></i> Transaksi<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
+                        <a href="{{route('setoran.index')}}"><i class="fa fa-money fa-fw"></i> Transaksi</a>
+                        {{-- <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{route('setoran.index')}}">Setoran</a>
+                                <a href="">Setoran</a>
                             </li>
-
+{{-- 
                             <li>
                                 <a href="{{route('penarikan.index')}}">Penarikan</a>
-                            </li>
+                            </li> --}}
 
-                        </ul>
+                        {{-- </ul> --}}
                         <!-- /.nav-second-level -->
                     </li>
 
 
                     <li>
-                        <a href="{{ url('/laporan') }}"><i class="fa fa-print fa-fw"></i> Laporan Transaksi</a>
-                        
+                        <a href="#"><i class="fa fa-file"></i>  Laporan Transaksi<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{route('laporanharian.index')}}">Laporan Transaksi Harian</a>
+                            </li>
+
+                            <li>
+                                <a href="{{route('laporan.index')}}">Laporan Transaksi Custom</a>
+                            </li>
+
+                        </ul>
                         <!-- /.nav-second-level -->
                     </li>
 
@@ -164,6 +160,17 @@
                         <!-- /.nav-second-level -->
                     </li>
                    
+                    <li>
+                        <a href="{{route('backup.index')}}"><i class="fa fa-database"></i> Backup Data</a>
+                       
+                        <!-- /.nav-second-level -->
+                    </li>
+                    
+                    <li>
+                        <a href="{{route('restore.index')}}"><i class="fa fa-database"></i> Restore Data</a>
+                       
+                        <!-- /.nav-second-level -->
+                    </li>
                     <!-- <li>
                         <a href="{{ url('/keluar') }}"><i class="fa fa-wrench fa-fw"></i>Keluar</a>
                        
@@ -187,10 +194,6 @@
                 <li>
                     <a href="/profile"><i class="fa fa-dashboard fa-fw"></i>Profile</a>
                 </li>
-
-
-
-
                 <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -205,23 +208,10 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
-
-
-
-
-
             </ul>
-
         </div>
-
     </div>
-
 </div>
-
-
-
-
-
 
 <!-- Page Content -->
 <div id="page-wrapper">

@@ -17,10 +17,12 @@ class TambahDataSiswaController extends Controller
      */
     public function index(Request $request)
     {
+        
 		$cari = $request->cari;
 
         $data_siswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
         ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('tahun_angkatan','tahun_angkatan.id_tahun_angkatan','=','siswa1.tahun_angkatan')
         ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
         if(!empty($request->cari)){
             $data_siswa = $data_siswa->where('nama','like',"%".$cari."%");
@@ -29,7 +31,8 @@ class TambahDataSiswaController extends Controller
         $kelas = \App\Kelas::all();
         $jurusan = \App\Jurusan::all();
         $kelasmeta = \App\KelasMeta::all();
-        return view('admin.datasiswa.add', ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]), 'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
+        $data_tahun = \App\TahunAngkatan::all();
+        return view('admin.datasiswa.add', ['data_tahun' => $data_tahun], ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]), 'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
         // echo json_encode($data_siswa);
 
     }
@@ -40,6 +43,18 @@ class TambahDataSiswaController extends Controller
      */
     public function create(Request $request)
     {
+        $this->validate($request,[
+            'nis' => 'required|numeric|unique:siswa1',
+            'no_rekening' => 'required|numeric|unique:siswa1',
+            'nama' => 'required',
+            'kelas' => 'required',
+            'jurusan' => 'required',
+            'angka' => 'required',
+            'tahun_angkatan' => 'required',
+            'jenis_kelamin' => 'required',
+            'alamat' => 'required',
+            'no_telepon' => 'required',
+         ]);
         \App\Siswa::create($request->all());
         return redirect('tambah')->with('sukses', 'Data Berhasil Diinput');
         
@@ -65,11 +80,18 @@ class TambahDataSiswaController extends Controller
     public function show($id)
     {
         //
-        $datasiswa = \App\Siswa::find($id);
+       // $datasiswa = \App\Siswa::find($id);
+        $datasiswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('tahun_angkatan','tahun_angkatan.id_tahun_angkatan','=','siswa1.tahun_angkatan')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
+        ->where('siswa1.id', $id)
+        ->first();
         $kelas = \App\Kelas::all();
         $jurusan = \App\Jurusan::all();
         $kelasmeta = \App\KelasMeta::all();
-        return view('admin.datasiswa.detaildatasiswa', ['datasiswa' => $datasiswa], ['kelas' => $kelas], ['jurusan' => $jurusan], ['kelasmeta' => $kelasmeta]);
+        $data_tahun = \App\TahunAngkatan::all();
+        return view('admin.datasiswa.detaildatasiswa', ['data_tahun' => $data_tahun], ['datasiswa' => $datasiswa], ['kelas' => $kelas], ['jurusan' => $jurusan], ['kelasmeta' => $kelasmeta]);
 
     }
 
@@ -81,9 +103,20 @@ class TambahDataSiswaController extends Controller
      */
     public function edit($id)
     {
-        //
-        $datasiswa = \App\Siswa::find($id);
-        return view('admin.datasiswa.editdatasiswa', ['datasiswa' => $datasiswa]);
+        // //
+        // $datasiswa = \App\Siswa::find($id);
+        
+        $datasiswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('tahun_angkatan','tahun_angkatan.id_tahun_angkatan','=','siswa1.tahun_angkatan')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
+        ->where('siswa1.id', $id)
+        ->first();;
+        $kelas = \App\Kelas::all();
+        $jurusan = \App\Jurusan::all();
+        $kelasmeta = \App\KelasMeta::all();
+        $data_tahun = \App\TahunAngkatan::all();
+        return view('admin.datasiswa.editdatasiswa', ['data_tahun' => $data_tahun, 'datasiswa' => $datasiswa, 'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
     }
 
     /**
@@ -119,4 +152,5 @@ class TambahDataSiswaController extends Controller
         $datasiswa->delete($datasiswa);
         return redirect('tambah')->with('sukses', 'Data Berhasil Di hapus');
     }
+    
 }

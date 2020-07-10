@@ -27,6 +27,7 @@ class SiswaImport implements ToModel
             'no_telepon' => $row[9],
             'angka' => $row[10], 
             'nilai_siswa' => $row[11],
+            
         ]);
     }
 }

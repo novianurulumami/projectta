@@ -108,6 +108,7 @@ class ImportController extends Controller
 	{
 		// validasi
 		$this->validate($request, [
+            
 			'file' => 'required|mimes:csv,xls,xlsx'
 		]);
  

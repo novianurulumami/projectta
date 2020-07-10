@@ -17,11 +17,13 @@ class TambahDataKelasController extends Controller
         $data_siswa = \App\Siswa::join('kelas1','kelas1.id_kelas','=','siswa1.kelas')
         ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
         ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
+        ->join('tahun_angkatan','tahun_angkatan.id_tahun_angkatan','=','siswa1.tahun_angkatan')
         ->get();
         $data_kelas = \App\Kelas::all();
         $data_jurusan = \App\Jurusan::all();
         $data_kelasmeta = \App\KelasMeta::all();
-        return view('admin.datasiswa.addkelas', ['data_kelas' => $data_kelas, 'data_jurusan' => $data_jurusan, 'data_kelasmeta' => $data_kelasmeta]);
+        $data_tahun = \App\TahunAngkatan::all();
+        return view('admin.datasiswa.addkelas', ['data_kelas' => $data_kelas, 'data_jurusan' => $data_jurusan, 'data_tahun' => $data_tahun, 'data_kelasmeta' => $data_kelasmeta]);
     }
 
     /**
@@ -40,6 +42,13 @@ class TambahDataKelasController extends Controller
     {
         
         \App\KelasMeta::create($request->all());
+        return redirect('tambahjurusan')->with('sukses', 'Data Berhasil Diinput');
+    }
+
+    public function create2(Request $request)
+    {
+        
+        \App\TahunAngkatan::create($request->all());
         return redirect('tambahjurusan')->with('sukses', 'Data Berhasil Diinput');
     }
     /**

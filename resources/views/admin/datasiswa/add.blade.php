@@ -17,7 +17,7 @@
 </div>
 <div class="box-body">
 <table class="table table-hover table-stripped table-bordered" >
-            <thread>
+            <thead>
               <tr>
                 <th>NIS</th>
                 <th>NO REKENING</th>
@@ -29,7 +29,7 @@
                 <th>JENIS KELAMIN</th>
                 <th>AKSI</th>
               </tr>
-            </thread>
+            </thead>
             @foreach($data_siswa as $datasiswa)
               <tr>
               <td>{{$datasiswa->nis}}</td>
@@ -38,7 +38,7 @@
               <td>{{$datasiswa->nama_kelas}}</td>
               <td>{{$datasiswa->nama_jurusan}}</td>
               <td>{{$datasiswa->nama_angka}}</td>
-              <td>{{$datasiswa->tahun_angkatan}}</td>
+              <td>{{$datasiswa->tahun}}</td>
               <td>{{$datasiswa->jenis_kelamin}}</td>
               <td> <a href="{{route('detaildatasiswa', $datasiswa->id, 'detail')}}"><i class="fa fa-info-circle"></i></a>  | 
               <a href="{{route('editdata', $datasiswa->id, 'edit')}}"><i class="fa fa-edit"></i></a>   |
@@ -49,7 +49,15 @@
           {{ $data_siswa->links() }}
           </div>
     </div>
-
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -65,27 +73,33 @@
         {{csrf_field()}}
         <div class="form-group">
           <label for="exampleInputEmail1">NIS</label>
-          <input type="text" class="form-control" name="nis" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="NIS">
+          <input type="text" class="form-control" name="nis" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="NIS" required>
         </div>
         
         <div class="form-group">
           <label for="exampleInputEmail1">NO REKENING</label>
-          <input type="text" class="form-control" name="no_rekening" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="NO REKENING">
+          <input type="text" class="form-control" name="no_rekening" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="NO REKENING" required>
         </div>
 
         <div class="form-group">
           <label for="exampleInputEmail1">Nama Lengkap</label>
-          <input name="nama" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Lengkap">
+          <input name="nama" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Lengkap" required>
         </div>
 
         <div class="form-group">
           <label for="exampleInputEmail1">Tahun Angkatan</label>
-          <input name="tahun_angkatan" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tahun Angkatan">
+          <select name="tahun_angkatan" class="form-control" id="exampleFormControlSelect1" required>
+            <option value="" selected disabled>- Pilih Tahun -</option>
+            @foreach ($data_tahun as $item)
+              <option value="{{$item->id_tahun_angkatan}}"> {{$item->tahun}}</option>
+            @endforeach
+          </select>
         </div>
 
         <div class="form-group">
           <label for="exampleFormControlSelect1">Pilih Kelas</label>
-          <select name="kelas" class="form-control" id="exampleFormControlSelect1">
+          <select name="kelas" class="form-control" id="exampleFormControlSelect1" required>
+            <option value="" selected disabled>- Pilih Kelas -</option>
             @foreach ($kelas as $item)
               <option value="{{$item->id_kelas}}"> {{$item->nama_kelas}}</option>
             @endforeach
@@ -94,7 +108,8 @@
         
         <div class="form-group">
           <label for="exampleFormControlSelect1">Pilih Jurusan</label>
-          <select name="jurusan" class="form-control" id="exampleFormControlSelect1">
+          <select name="jurusan" class="form-control" id="exampleFormControlSelect1" required>
+            <option value="" selected disabled>- Pilih Jurusan -</option>
             @foreach ($jurusan as $item)
               <option value="{{$item->id_jurusan}}"> {{$item->nama_jurusan}}</option>
             @endforeach
@@ -103,7 +118,8 @@
 
         <div class="form-group">
           <label for="exampleFormControlSelect1">Pilih Angka</label>
-          <select name="angka" class="form-control" id="exampleFormControlSelect1">
+          <select name="angka" class="form-control" id="exampleFormControlSelect1" required>
+            <option value="" selected disabled>- Pilih Angka -</option>
             @foreach ($kelasmeta as $item)
               <option value="{{$item->id_kelas_meta}}"> {{$item->nama_angka}}</option>
             @endforeach
@@ -112,7 +128,8 @@
 
         <div class="form-group">
           <label for="exampleFormControlSelect1">Pilih Jenis Kelamin</label>
-          <select name="jenis_kelamin" class="form-control" id="exampleFormControlSelect1">
+          <select name="jenis_kelamin" class="form-control" id="exampleFormControlSelect1" required>
+            <option value="" selected disabled>- Pilih Jenis Kelamin -</option>
             <option>Laki-Laki</option>
             <option>Perempuan</option>
           </select>
@@ -120,12 +137,12 @@
 
         <div class="form-group">
           <label for="exampleInputEmail1">Alamat</label>
-          <input name="alamat" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Alamat">
+          <input name="alamat" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Alamat" required>
         </div>
 
         <div class="form-group">
           <label for="exampleInputEmail1">No Telepon</label>
-          <input name="no_telepon" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="No Telepon">
+          <input name="no_telepon" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="No Telepon" required>
         </div>
       </div>
       <div class="modal-footer">

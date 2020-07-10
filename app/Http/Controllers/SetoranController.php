@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Jurusan;
+use App\Siswa;
+use App\Kelas;
+use App\KelasMeta;
+use Illuminate\Support\Facades\DB;
 
 class SetoranController extends Controller
 {
@@ -11,10 +16,20 @@ class SetoranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        return view('admin.setoran.index');
+        $datasiswa = '';
+        if($request->nis != NULL){
+        $datasiswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+            ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+            ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
+            ->where('siswa1.nis',$request->nis)
+            ->first();
+        // return $datasiswa;
+
+        }
+        return view('admin.setoran.index', ['datasiswa' => $datasiswa]);
+
     }
 
     /**
@@ -25,6 +40,7 @@ class SetoranController extends Controller
     public function create()
     {
         //
+        return view('admin.setoran.cetak');
     }
 
     /**
@@ -58,6 +74,7 @@ class SetoranController extends Controller
     public function edit($id)
     {
         //
+        
     }
 
     /**
@@ -82,4 +99,5 @@ class SetoranController extends Controller
     {
         //
     }
+
 }

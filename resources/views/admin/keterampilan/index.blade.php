@@ -1,66 +1,47 @@
 @extends('layouts.admin')
 @section('content')
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
-<head>
-    <link href="{{asset('css/dropdown.css')}}" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-    <style media="screen">
-        .left{
-            float: left;
-            display: block;
-        }
-        .right{
-            float: right;
-            display: block;
-        }
-    </style>
-</head>
-<section class="content">
-
-      <div class="box">  
-        <div class="box-header">
-
+<body>
          <!-- Button trigger modal -->
          <h3>Keterampilan</h3>
         </div>
-        <ul class="nav nav-tabs">
-          <li class="dropdown">
-            <select name="angka" class="form-control" id="exampleFormControlSelect1">
-              <option><a href="#">X</a></option>
-              <option><a href="#">XI</a></option>
-              <option><a href="#">XII</a></option>
-            </select>
-          </li>
-          <li class="dropdown">
-            <select name="angka" class="form-control" id="exampleFormControlSelect1">
-              <option>Akuntansi</option>
-              <option>Multimedia</option>
-              <option>Pemasaran</option>
-              <option>Perkantoran</option>
-            </select>
-          </li>
-          <li class="dropdown">
-            <select name="angka" class="form-control" id="exampleFormControlSelect1">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-            </select>
-          </li>
-          <button class="btn btn-default" type="button">
-            <i class="fa fa-search"></i>
-        </ul>
+        <form action="{{url('cariketerampilan')}}" method="GET">
+          <ul class="nav nav-tabs">
+            <li class="dropdown">
+              <select name="id_kelas" class="form-control" id="">
+                <option value="" selected>Semua</option>
+                @foreach ($kelas as $key => $item)
+                <option value="{{$item->id_kelas}}" {{($item->id_kelas == $input->id_kelas) ? "selected" : ""}}>
+                  {{$item->nama_kelas}}</option>
+                @endforeach
+              </select>
+            </li>
+            <li class="dropdown">
+              <select name="id_jurusan" class="form-control" id="">
+                <option value="" selected>Semua</option>
+                @foreach ($jurusan as $key => $item )
+                      <option value="{{$item->id_jurusan}}" {{$item->id_jurusan == $input->id_jurusan ? "selected" : ""}}>{{$item->nama_jurusan}}</option>
+                @endforeach
+              </select>
+            </li>
+            <li class="dropdown">
+              <select name="id_kelas_meta" class="form-control" id="">
+                <option value="" selected>Semua</option>
+                @foreach ($kelasmeta as $key => $item)
+                <option value="{{$item->id_kelas_meta}}" {{$item->id_kelas_meta == $input->id_kelas_meta  ? "selected" : ""}}>{{$item->nama_angka}}</option>
+                 @endforeach
+              </select>
+            </li>
+            <button class="btn btn-default" type="submit"><i class="fa fa-search"></i>
+            </button>
+          </ul>
+        </form>
         <br></br>
         <div class="box-body">
           <table class="table table-stripped table-bordered">
-            <thread>
+            <thead></thead>
               <tr>
                 <th>NIS</th>
                 <th>NO REKENING</th>
@@ -70,7 +51,7 @@
                 <th>NAMA SISWA</th>
                 <th>NILAI KETERAMPILAN</th>
                 <th>AKSI</th>
-            </thread>
+            </thead>
             @foreach($data_siswa as $datasiswa)
               <tr>
               <td>{{$datasiswa->nis}}</td>
@@ -90,7 +71,6 @@
           {{ $data_siswa->links() }}
           <a href="{{route('cetakketerampilan')}}" class="btn btn-primary" target="_blank">CETAK</a>
         </div>
-      </div>
-     </section>
 </html>
+</body>
 @stop

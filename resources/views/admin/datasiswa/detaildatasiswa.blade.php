@@ -9,24 +9,49 @@
         </div>
     @endif
 
-    <div class="row">
-        <div class="col-md-6">
+    <div class="box-body">
         <form method="POST" action="{{route('detaildatasiswa', $datasiswa->id, 'detail')}}">
           {{csrf_field()}}
-          <div class="form-group">
+          <table class="table table-hover table-stripped table-bordered" >
+            <thead>
+              <tr>
+                <th>NIS</th>
+                <th>NO REKENING</th>
+                <th>NAMA LENGKAP</th>
+                <th>KELAS</th>
+                <th>JURUSAN</th>
+                <th>ANGKA</th>
+                <th>THN ANGKATAN</th>
+                <th>JENIS KELAMIN</th>
+                <th>ALAMAT</th>
+                <th>NO TELEPON</th>
+              </tr>
+            </thead>
+              <tr>
+              <td>{{$datasiswa->nis}}</td>
+              <td>{{$datasiswa->no_rekening}}</td>
+              <td>{{$datasiswa->nama}}</td>
+              <td>{{$datasiswa->nama_kelas}}</td>
+              <td>{{$datasiswa->nama_jurusan}}</td>
+              <td>{{$datasiswa->nama_angka}}</td>
+              <td>{{$datasiswa->tahun}}</td>
+              <td>{{$datasiswa->jenis_kelamin}}</td>
+              <td>{{$datasiswa->alamat}}</td>
+              <td>{{$datasiswa->no_telepon}}</td>
+              </tr>
+          </table>
+          {{-- <div class="form-group">
             <p>NIS : {{$datasiswa->nis}}</p>
             <p>No Rekening : {{$datasiswa->no_rekening}}</p>
             <p>Nama Lengkap : {{$datasiswa->nama}}</p>
             <p>Tahun Angkatan : {{$datasiswa->tahun_angkatan}}</p>
-            <p>Kelas : {{$datasiswa->kelas}}</p>
-            <p>Jurusan : {{$datasiswa->jurusan}}</p>
-            <p>Angka : {{$datasiswa->angka}}</p>
+            <p>Kelas : {{$datasiswa->nama_kelas}}</p>
+            <p>Jurusan : {{$datasiswa->nama_jurusan}}</p>
+            <p>Angka : {{$datasiswa->nama_angka}}</p>
             <p>Jenis Kelamin : {{$datasiswa->jenis_kelamin}}</p>
             <p>Alamat : {{$datasiswa->alamat}}</p>
             <p>No Telepon : {{$datasiswa->no_telepon}}</p>
-          </div>
+          </div> --}}
         </form>
-      </div>
-    </div>
 </div>
 @endsection

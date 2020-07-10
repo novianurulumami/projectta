@@ -22,11 +22,23 @@ class EditDataKelasController extends Controller
         if(!empty($request->cari)){
             $data_siswa = $data_siswa->where('nama','like',"%".$cari."%");
         }
+        if($request->id_kelas != ''){
+            $data_siswa = $data_siswa->where('id_kelas',$request->id_kelas);    
+        }
+        if($request->id_jurusan != ''){
+            $data_siswa = $data_siswa->where('id_jurusan',$request->id_jurusan);    
+        }
+        if($request->id_kelas_meta != ''){
+            $data_siswa = $data_siswa->where('id_kelas_meta',$request->id_kelas_meta);    
+        }
         $data_siswa = $data_siswa->paginate(5);
         $kelas = \App\Kelas::all();
         $jurusan = \App\Jurusan::all();
         $kelasmeta = \App\KelasMeta::all();
-        return view('admin.datasiswa.editdata', ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]), 'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
+        return view('admin.datasiswa.editdata',
+         ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]),
+         'input' => $request,
+         'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
         
 
     }

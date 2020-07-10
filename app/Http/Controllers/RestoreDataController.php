@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PenarikanCetakController extends Controller
+class RestoreDataController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class PenarikanCetakController extends Controller
     public function index()
     {
         //
-        return view('admin.penarikan.cetak');
+        return view('admin.restoredata.index');
     }
 
     /**

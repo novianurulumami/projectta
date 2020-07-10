@@ -11,7 +11,8 @@
 
     <div class="row">
         <div class="col-md-6">
-        <form method="POST" action="{{route('updatedata', $datasiswa->id, 'update')}}">
+        <form method="POST" action="{{route('updatedata', [$datasiswa->id], 'update')}}">
+          {{ method_field('PUT') }}
           {{csrf_field()}}
           <div class="form-group">
             <label for="exampleInputEmail1">NIS</label>
@@ -34,37 +35,37 @@
           </div>
   
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Pilih Kelas</label>
-            <select name="kelas" class="form-control" id="exampleFormControlSelect1">
-              {{-- @foreach ($kelas as $item)
-                <option value="{{$item->id_kelas}}"> {{$item->nama_kelas}}</option>
-              @endforeach --}}
+            <label for="">Pilih Kelas</label>
+            <select name="kelas" class="form-control" id="">
+              @foreach ($kelas as $item)
+            <option value="{{$item->id_kelas}}" {{($item->id_kelas == $datasiswa->id_kelas) ? "selected" : ""}}>{{$item->nama_kelas}}</option>
+              @endforeach
             </select>
           </div>
           
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Pilih Jurusan</label>
-            <select name="jurusan" class="form-control" id="exampleFormControlSelect1">
-              {{-- @foreach ($jurusan as $item)
-                <option value="{{$item->id_jurusan}}"> {{$item->nama_jurusan}}</option>
-              @endforeach --}}
+            <label for="">Pilih Jurusan</label>
+            <select name="jurusan" class="form-control" id="">
+              @foreach ($jurusan as $item )
+                <option value="{{$item->id_jurusan}}" {{$item->id_jurusan == $datasiswa->id_jurusan ? "selected" : ""}}>{{$item->nama_jurusan}}</option>
+              @endforeach
             </select>
           </div>
   
           <div class="form-group">
             <label for="exampleFormControlSelect1">Pilih Angka</label>
             <select name="angka" class="form-control" id="exampleFormControlSelect1">
-              {{-- @foreach ($kelasmeta as $item)
-                <option value="{{$item->id_kelasmeta}}"> {{$item->nama_angka}}</option>
-              @endforeach --}}
+              @foreach ($kelasmeta as $item)
+                <option value="{{$item->id_kelas_meta}}" {{$item->id_kelas_meta == $datasiswa->id_kelas  ? "selected" : ""}}>{{$item->nama_angka}}</option>
+              @endforeach
             </select>
           </div>
   
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Pilih Jenis Kelamin</label>
-            <select name="jenis_kelamin" class="form-control" id="exampleFormControlSelect1">
-              <option>Laki-Laki</option>
-              <option>Perempuan</option>
+            <label >Pilih Jenis Kelamin</label>
+            <select name="jenis_kelamin" id="" class="form-control">
+              <option value="Laki-laki" {{$datasiswa->jenis_kelamin == 'Laki-laki'?'selected':''}}>Laki-laki</option>
+              <option value="Perempuan" {{$datasiswa->jenis_kelamin == 'Perempuan'?'selected':''}}>Perempuan</option>
             </select>
           </div>
   

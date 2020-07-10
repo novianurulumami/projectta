@@ -3,13 +3,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <link href="{{asset('css/dropdown.css')}}" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-</head>
 <div class="container-fruid">
     <div class="row">
         <h3>Data Siswa</h3>
@@ -17,38 +10,41 @@
             <a href="{{route('tambah')}}" class="btn btn-info active" role="button" aria-pressed="true"><i class="fa fa-plus"></i>   Tambah Data Siswa</a>
             <a href="{{route('tambahkelas')}}" class="btn btn-info active" role="button" aria-pressed="true"><i class="fa fa-plus"></i>   Tambah Data Kelas</a>
             <a href="{{route('datakelas.index')}}" class="btn btn-info active" role="button" aria-pressed="true"> <i class="fa fa-edit"></i>   Edit Data Kelas</a>
-            <a href="{{route('import.index')}}" class="btn btn-info active" role="button" aria-pressed="true">Import Data</a>
-            <a href="{{route('export.index')}}" class="btn btn-info active" role="button" aria-pressed="true">Export Data</a>
+            <a href="{{route('import.index')}}" class="btn btn-info active" role="button" aria-pressed="true"> <i class="fa fa-file-excel-o"></i>  Import Data Siswa</a>
+            <a href="{{route('export.index')}}" class="btn btn-info active" role="button" aria-pressed="true"> <i class="fa fa-file-excel-o"></i>  Export Data Siswa</a>
         <br/><br/>
+
+<form action="{{url('caridatasiswa')}}" method="GET">
     <ul class="nav nav-tabs">
       <li class="dropdown">
-        <select name="angka" class="form-control" id="exampleFormControlSelect1">
-          <option><a href="#">X</a></option>
-          <option><a href="#">XI</a></option>
-          <option><a href="#">XII</a></option>
+        <select name="id_kelas" class="form-control" id="">
+          <option value="" selected>Semua</option>
+          @foreach ($kelas as $key => $item)
+          <option value="{{$item->id_kelas}}" {{($item->id_kelas == $input->id_kelas) ? "selected" : ""}}>
+            {{$item->nama_kelas}}</option>
+          @endforeach
         </select>
       </li>
       <li class="dropdown">
-        <select name="angka" class="form-control" id="exampleFormControlSelect1">
-          <option>Akuntansi</option>
-          <option>Multimedia</option>
-          <option>Pemasaran</option>
-          <option>Perkantoran</option>
+        <select name="id_jurusan" class="form-control" id="">
+          <option value="" selected>Semua</option>
+          @foreach ($jurusan as $key => $item )
+                <option value="{{$item->id_jurusan}}" {{$item->id_jurusan == $input->id_jurusan ? "selected" : ""}}>{{$item->nama_jurusan}}</option>
+          @endforeach
         </select>
       </li>
       <li class="dropdown">
-        <select name="angka" class="form-control" id="exampleFormControlSelect1">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
+        <select name="id_kelas_meta" class="form-control" id="">
+          <option value="" selected>Semua</option>
+          @foreach ($kelasmeta as $key => $item)
+          <option value="{{$item->id_kelas_meta}}" {{$item->id_kelas_meta == $input->id_kelas_meta  ? "selected" : ""}}>{{$item->nama_angka}}</option>
+           @endforeach
         </select>
       </li>
-      <button class="btn btn-default" type="button">
-        <i class="fa fa-search"></i>
+      <button class="btn btn-default" type="submit"><i class="fa fa-search"></i>
+      </button>
     </ul>
+  </form>
 
             <br/><br/>
             <form action="{{url('datasiswa')}}" method="GET">
@@ -56,7 +52,7 @@
                         <div class="input-group custom-search-form">
                             <input type="text" name="cari" class="form-control" placeholder="Search..." value="{{ old('cari') }}">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default"  type="submit" value="CARI">
+                                    <button class="btn btn-primary"  type="submit" value="CARI">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
@@ -106,6 +102,5 @@
     </section>
     </div>
 </div>
-
 </html>
 @stop

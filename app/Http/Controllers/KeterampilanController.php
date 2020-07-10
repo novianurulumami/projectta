@@ -26,11 +26,20 @@ class KeterampilanController extends Controller
         if(!empty($request->cari)){
             $data_siswa = $data_siswa->where('nama','like',"%".$cari."%");
         }
+        if($request->id_kelas != ''){
+            $data_siswa = $data_siswa->where('id_kelas',$request->id_kelas);    
+        }
+        if($request->id_jurusan != ''){
+            $data_siswa = $data_siswa->where('id_jurusan',$request->id_jurusan);    
+        }
+        if($request->id_kelas_meta != ''){
+            $data_siswa = $data_siswa->where('id_kelas_meta',$request->id_kelas_meta);    
+        }
         $data_siswa = $data_siswa->paginate(5);
         $kelas = \App\Kelas::all();
         $jurusan = \App\Jurusan::all();
         $kelasmeta = \App\KelasMeta::all();
-        return view('admin.keterampilan.index', ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]), 'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
+        return view('admin.keterampilan.index',  ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]), 'input' => $request, 'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
         // echo json_encode($data_siswa);
     }
 
@@ -116,8 +125,14 @@ class KeterampilanController extends Controller
 
     public function cetak_pdf()
     {
+        $data_siswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')->get();
         $datasiswa = \App\Siswa::all();
-    	$pdf = PDF::loadview('keterampilan_pdf', ['datasiswa' => $datasiswa]);
-    	return $pdf->download('laporan-pegawai-pdf');
+        $kelas = \App\Kelas::all();
+        $jurusan = \App\Jurusan::all();
+        $kelasmeta = \App\KelasMeta::all();
+    	$pdf = PDF::loadview('admin.keterampilan.keterampilanpdf', ['datasiswa' => $datasiswa], ['data_siswa' => $data_siswa])->setPaper('A4', 'potrait');
+    	return $pdf->stream('NilaiSiswa.pdf');
     }
 }

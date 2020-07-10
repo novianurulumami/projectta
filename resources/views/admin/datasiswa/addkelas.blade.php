@@ -1,6 +1,40 @@
 @extends('layouts.admin')
 @section('content')
 <div class="container">
+  <div class="row">
+  <div class="col-6">
+  </div>
+  <div class="col-6">
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Data Kelas</button>
+  <br></br>
+      @if(session('sukses'))
+          <div class="alert alert-success" role="alert">
+          {{session('sukses')}}
+          </div>
+      @endif
+  </div>
+  
+      <div class="box-body">
+          <table class="table table-hover table-stripped table-bordered" >
+                      <thread>
+                        <tr>
+                          <th>ID</th>
+                          <th>NAMA KELAS</th>
+                          <th>AKSI</th>
+                        </tr>
+                      </thread>
+                      @foreach($data_kelas as $datakelas)
+                        <tr>
+                        <td>{{$datakelas->id_kelas}}</td>
+                        <td>{{$datakelas->nama_kelas}}</td>
+                        <td> <a href=""><i class="fa fa-info-circle"></i></a>  | 
+                        <a href=""> <i class="fa fa-trash"></i> </a> </a>  </td>
+                        </tr>
+                      @endforeach
+                    </table>
+                    </div>
+<div class="container">
     <div class="row">
     <div class="col-6">
     </div>
@@ -60,42 +94,6 @@
         </div>
       </div>
     </div>
-
-
-<div class="container">
-<div class="row">
-<div class="col-6">
-</div>
-<div class="col-6">
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Data Kelas</button>
-<br></br>
-    @if(session('sukses'))
-        <div class="alert alert-success" role="alert">
-        {{session('sukses')}}
-        </div>
-    @endif
-</div>
-
-    <div class="box-body">
-        <table class="table table-hover table-stripped table-bordered" >
-                    <thread>
-                      <tr>
-                        <th>ID</th>
-                        <th>NAMA KELAS</th>
-                        <th>AKSI</th>
-                      </tr>
-                    </thread>
-                    @foreach($data_kelas as $datakelas)
-                      <tr>
-                      <td>{{$datakelas->id_kelas}}</td>
-                      <td>{{$datakelas->nama_kelas}}</td>
-                      <td> <a href=""><i class="fa fa-info-circle"></i></a>  | 
-                      <a href=""> <i class="fa fa-trash"></i> </a> </a>  </td>
-                      </tr>
-                    @endforeach
-                  </table>
-                  </div>
 
     <div class="container">
         <div class="row">
@@ -158,6 +156,67 @@
             </div>
           </div>
         </div>
+      </div>
 
-        
+      <div class="container">
+        <div class="row">
+        <div class="col-6">
+        </div>
+        <div class="col-6">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3"> <i class="fa fa-plus"></i>   Tambah Data Tahun</button>
+        <br></br>
+            @if(session('sukses'))
+                <div class="alert alert-success" role="alert">
+                {{session('sukses')}}
+                </div>
+            @endif
+        </div>
+
+                    <div class="box-body">
+                        <table class="table table-hover table-stripped table-bordered" >
+                                    <thead>
+                                      <tr>
+                                        <th>ID</th>
+                                        <th>Tahun Angkatan</th>
+                                        <th>AKSI</th>
+                                      </tr>
+                                    </thead>
+                                    @foreach($data_tahun as $datatahun)
+                                      <tr>
+                                      <td>{{$datatahun->id_tahun_angkatan}}</td>
+                                      <td>{{$datatahun->tahun}}</td>
+                                      <td> <a href=""><i class="fa fa-info-circle"></i></a>  | 
+                                      <a href=""> <i class="fa fa-trash"></i> </a> </a>  </td>
+                                      </tr>
+                                    @endforeach
+                                  </table>
+                                  </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Tahun</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+              <form method="POST" action="{{route('tambahdatatahun')}}">
+                {{csrf_field()}}
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tahun</label>
+                    <input type="text" class="form-control" name="tahun" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tahun">
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                    </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
 @endsection
