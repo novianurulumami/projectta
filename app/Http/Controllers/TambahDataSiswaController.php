@@ -23,7 +23,8 @@ class TambahDataSiswaController extends Controller
         $data_siswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
         ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
         ->join('tahun_angkatan','tahun_angkatan.id_tahun_angkatan','=','siswa1.tahun_angkatan')
-        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
+        ->orderBy('id_kelas')->orderBy('id_jurusan')->orderBy('id_kelas_meta');
         if(!empty($request->cari)){
             $data_siswa = $data_siswa->where('nama','like',"%".$cari."%");
         }

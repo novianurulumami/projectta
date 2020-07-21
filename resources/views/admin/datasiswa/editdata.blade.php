@@ -39,7 +39,7 @@
           </ul>
         </form>
 
-        <br></br>
+        <br>
         <a href="#" class="btn btn-info active right" role="button" data-toggle="modal" data-target="#exampleModal" onclick="refresh()">Edit Kelas</a>
         <br></br>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

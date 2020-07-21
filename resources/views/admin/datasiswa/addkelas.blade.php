@@ -17,13 +17,13 @@
   
       <div class="box-body">
           <table class="table table-hover table-stripped table-bordered" >
-                      <thread>
+                      <thead>
                         <tr>
                           <th>ID</th>
                           <th>NAMA KELAS</th>
                           <th>AKSI</th>
                         </tr>
-                      </thread>
+                      </thead>
                       @foreach($data_kelas as $datakelas)
                         <tr>
                         <td>{{$datakelas->id_kelas}}</td>
@@ -50,13 +50,13 @@
     </div>
     <div class="box-body">
     <table class="table table-hover table-stripped table-bordered" >
-                <thread>
+                <thead>
                   <tr>
                     <th>ID</th>
                     <th>NAMA JURUSAN</th>
                     <th>AKSI</th>
                   </tr>
-                </thread>
+                </thead>
                 @foreach($data_jurusan as $datajurusan)
                   <tr>
                   <td>{{$datajurusan->id_jurusan}}</td>
@@ -111,13 +111,13 @@
         </div>
                     <div class="box-body">
                         <table class="table table-hover table-stripped table-bordered" >
-                                    <thread>
+                                    <thead>
                                       <tr>
                                         <th>ID</th>
                                         <th>ANGKA KELAS</th>
                                         <th>AKSI</th>
                                       </tr>
-                                    </thread>
+                                    </thead>
                                     @foreach($data_kelasmeta as $datakelasmeta)
                                       <tr>
                                       <td>{{$datakelasmeta->id_kelas_meta}}</td>

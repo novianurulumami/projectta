@@ -3,7 +3,7 @@
 <h3>Transaksi</h3>
 <form action="" method="GET">
     <div class="form-group row">
-        <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Tanggal Penarikan</h4></label>
+        <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Tanggal Transaksi</h4></label>
        <!--  <input type="hidden" name="id" id="id"> -->
         <div class="col-md-2">
         <input type="text" value="<?php echo date("Y-m-d")?>" class="form-control" name="tgl_jual" aria-describedby="emailHelp" placeholder="TANGGAL JUAL" id="tgl_jual" disabled>
@@ -101,7 +101,7 @@
             <input type="text" id="" class="form-control">
         </div>
     </div>
-    <br></br>
+    <br>
     
     <!-- <button type='button' class='btn btn-primary center-block'>Simpan</button> -->
 <button type='button' class='btn btn-primary center-block'>Cetak</button>

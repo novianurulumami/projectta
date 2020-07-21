@@ -7,6 +7,7 @@
          <!-- Button trigger modal -->
          <h3>Keterampilan</h3>
         </div>
+        
         <form action="{{url('cariketerampilan')}}" method="GET">
           <ul class="nav nav-tabs">
             <li class="dropdown">
@@ -38,7 +39,7 @@
             </button>
           </ul>
         </form>
-        <br></br>
+        <br>
         <div class="box-body">
           <table class="table table-stripped table-bordered">
             <thead></thead>

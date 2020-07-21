@@ -1,9 +1,19 @@
 @extends('layouts.admin')
 @section('content')
 <h3><i class="fa fa-money"></i> Transaksi</h3>
+@if(session('sukses'))
+    <div class="alert alert-success" role="alert">
+    {{session('sukses')}}
+    </div>
+@endif
+@if(session('gagal'))
+    <div class="alert alert-danger" role="alert">
+    {{session('gagal')}}
+    </div>
+@endif
 <form action="{{route('setoraninput')}}" method="GET">
 <div class="form-group row">
-    <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Tanggal Penarikan</h4></label>
+    <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Tanggal Transaksi</h4></label>
    <!--  <input type="hidden" name="id" id="id"> -->
     <div class="col-md-2">
     <input type="text" value="<?php echo date("Y-m-d")?>" class="form-control" name="tgl_jual" aria-describedby="emailHelp" placeholder="TANGGAL JUAL" id="tgl_jual" disabled>
@@ -15,7 +25,6 @@
         <input type="text"  id="nis" name="nis"@if (!empty($datasiswa)) value={{$datasiswa->nis}} @endif class="form-control"> 
     </div>
     <div class="col-md-2">
-        
         <button type="submit" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
     </div>
 </div>
@@ -41,7 +50,6 @@
     <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Kelas</h4></label>
     <div class="col-md-4">
         <input type="text" name="kelas" disabled class="form-control" @if (!empty($datasiswa)) value="{{$datasiswa->nama_kelas}}" @endif>
-        <input type="hidden" @if (!empty($datasiswa)) value="{{$datasiswa->nama_kelas}}" @endif  name="kelas" class="form-control">
     </div>
 </div>
 
@@ -49,7 +57,6 @@
     <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Jurusan</h4></label>
     <div class="col-md-4">
         <input type="text" name="jurusan" disabled class="form-control" @if (!empty($datasiswa)) value="{{$datasiswa->nama_jurusan}}" @endif>
-        <input type="hidden" @if (!empty($datasiswa)) value="{{$datasiswa->nama_jurusan}}" @endif  name="jurusan" class="form-control">
     </div>
 </div>
 
@@ -57,53 +64,55 @@
     <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Angka</h4></label>
     <div class="col-md-4">
         <input type="text" name="angka" disabled class="form-control" @if (!empty($datasiswa)) value="{{$datasiswa->angka}}" @endif>
-        <input type="hidden" @if (!empty($datasiswa)) value="{{$datasiswa->angka}}" @endif  name="angka" class="form-control">
     </div>
 </div>
-
-<div class="form-group row">
-    <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Jenis Transaksi</h4></label>
-    <div class="col-md-4">
-        <select type="text" id="" class="form-control">
-            <option value="111">Setoran</option>
-            <option value="211">Penarikan</option>
-        </select>
+<form action="{{route('setoran.store')}}" method="POST">
+    {{csrf_field()}}
+    <div class="form-group row">
+        <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Jenis Transaksi</h4></label>
+        <div class="col-md-4">
+            <input type="hidden" @if (!empty($datasiswa)) value="{{$datasiswa->id}}" @endif  name="id_siswa" class="form-control">
+            <select type="text"  name="status_transaksi" class="form-control">
+                <option value="Setoran">Setoran</option>
+                <option value="Penarikan">Penarikan</option>
+            </select>
+        </div>
     </div>
-</div>
 
-<div class="form-group row">
-<label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Jurnal</h4></label>
-<div class="col-md-2">
-    <select type="text" id="" class="form-control">
-        <option value="111">Kas</option>
-        <option value="211">Hutang</option>
-    </select>
-</div>
-</div>
-
-<div class="form-group row">
-    <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Saldo</h4></label>
-    <div class="col-md-4"> 
-        <input type="text" id="" class="form-control">
+    <div class="form-group row">
+        <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Saldo</h4></label>
+        <div class="col-md-4"> 
+            <input type="text" id="" class="form-control" disabled @if (!empty($saldo)) value="{{'Rp. '.$saldo}}" @endif>
+        </div>
     </div>
-</div>
 
-<div class="form-group row">
-    <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Nominal</h4></label>
-    <div class="col-md-4">
-        <input type="text" id="" class="form-control">
+    <div class="form-group row">
+        <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Nominal</h4></label>
+        <div class="col-md-4">
+            <input type="number" name="nominal" class="form-control" required>
+        </div>
     </div>
-</div>
 
-<div class="form-group row">
-    <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Petugas</h4></label>
-    <div class="col-md-4">
-        <input type="text" id="" class="form-control">
+    <div class="form-group row">
+        <label for="email" class="col-md-2 col-form-label font-weight-normal"><h4>Petugas</h4></label>
+        <div class="col-md-4">
+            <input type="text" name="nama_petugas" class="form-control" required>
+        </div>
     </div>
-</div>
-<br></br>
-<a href="{{route('transaksicetak')}}" class="btn btn-primary" role="button" aria-pressed="true">Simpan</a>
+    <br></br>
 
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <button class="btn btn-primary" type="submit" role="button" aria-pressed="true">Simpan</button>
+
+</form>
 <!-- <button type='button' class='btn btn-primary center-block'>Simpan</button> -->
 
 @stop

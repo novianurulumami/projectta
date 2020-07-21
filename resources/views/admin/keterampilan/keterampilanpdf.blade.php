@@ -10,9 +10,7 @@
 			font-size: 9pt;
 		}
 	</style>
-	<center>
 		<h5>Nilai Siswa Praktik SMK PGRI Rogojampi</h4>
-			</center>
  
 <div class="box-body">
   <table class="table table-stripped table-bordered">  

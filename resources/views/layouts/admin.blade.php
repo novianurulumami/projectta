@@ -144,6 +144,10 @@
                                 <a href="{{route('laporan.index')}}">Laporan Transaksi Custom</a>
                             </li>
 
+                            <li>
+                                <a href="{{route('laporanseluruh.index')}}">Laporan Transaksi Keseluruhan</a>
+                            </li>
+
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>

@@ -49,7 +49,7 @@
 </div>
 <div class="box-body">
 <table class="table table-hover table-stripped table-bordered" >
-            <thread>
+            <thead>
               <tr>
                 <th>NIS</th>
                 <th>NO REKENING</th>
@@ -61,7 +61,7 @@
                 <th>JENIS KELAMIN</th>
                 <th>ALAMAT</th>
               </tr>
-            </thread>
+            </thead>
             @foreach($data_siswa as $datasiswa)
             <tr>
             <td>{{$datasiswa->nis}}</td>

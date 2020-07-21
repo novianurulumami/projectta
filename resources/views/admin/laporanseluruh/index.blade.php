@@ -16,26 +16,21 @@
 
 <body>
 
-<h3>Laporan Transaksi Harian</h3>
-<div class="col-md-12 col-sm-12 col-xs-12">
+
+
+<h3>Laporan Transaksi Keseluruhan</h3>
+    <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
     </div>
     </div>
     <div class="form-group row">
     <div class="col-md-4">
-        <label for="email" class="col-md-12 col-form-label font-weight-normal"><h5>Masukkan Saldo Harian :</h5></label>
-          <input id="" type="email" class="form-control " name="email" value="" required autocomplete="email" autofocus>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-
+      <label for="email" class="col-md-12 col-form-label font-weight-normal"><h5>Modal Awal Keseluruhan</h5></label>
+      <input id="" type="" class="form-control " name="" value="{{$saldoawal}}" required disabled>
     </div>
     <div class="col-md-4">
-      <label for="email" class="col-md-12 col-form-label font-weight-normal"><h5>Saldo Hari Ini</h5></label>
-        <input id="" type="email" class="form-control " name="email" value="" required autocomplete="email" autofocus>
-    </div>
-    <div class="col-md-4">
-      <label for="email" class="col-md-12 col-form-label font-weight-normal"><h5>Saldo Kredit Hari Ini</h5></label>
-        <input id="" type="email" class="form-control " name="email" value="" required autocomplete="email" autofocus>
+      <label for="email" class="col-md-12 col-form-label font-weight-normal"><h5>Modal Akhir Keseluruhan</h5></label>
+        <input id="" type="" class="form-control " name="" value="{{$saldoakhir}}" disabled>
     </div>
     </div>
     <div class="form-group row">
@@ -43,16 +38,16 @@
       </div>
       <div class="form-group row">
         <div class="col-md-4">
-          <label for="email" class="col-md-12 col-form-label font-weight-normal"><h5>Saldo Dedit Hari ini</h5></label>
-            <input id="" type="email" class="form-control " name="email" value="" required autocomplete="email" autofocus>
+          <label for="email" class="col-md-12 col-form-label font-weight-normal"><h5>Saldo Dedit Keseluruhan</h5></label>
+           <input id="" type="" class="form-control " name="" value="{{ $setoran }}" disabled>
         </div>
         <div class="col-md-4">
-          <label for="email" class="col-md-12 col-form-label font-weight-normal"><h5>Saldo Akhir Hari Ini</h5></label>
-            <input id="" type="email" class="form-control " name="email" value="" required autocomplete="email" autofocus>
+          <label for="email" class="col-md-12 col-form-label font-weight-normal"><h5>Saldo Kredit Keseluruhan</h5></label>
+          <input id="" type="" class="form-control " name="" value="{{$penarikan}}" disabled>
         </div>
         </div>
-
-        <form action="{{url('carilaporanharian')}}" method="GET">
+        
+        <form action="{{url('carilaporanseluruh')}}" method="GET">
           <ul class="nav nav-tabs">
             <li class="dropdown">
               <select name="id_kelas" class="form-control" id="">
@@ -90,7 +85,6 @@
           </ul>
         </form>
                 <br>
-
     <div class="box-body">
           <table class="table table-stripped table-bordered">
             <thead>

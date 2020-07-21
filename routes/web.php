@@ -22,9 +22,8 @@ Route::get('/tambah', 'TambahDataSiswaController@index')->name('tambah');
 Route::get('/importberhasil', 'ImportController@index')->name('importberhasil');
 Route::get('/tambahjurusan', 'TambahDataKelasController@index')->name('tambahjurusan');
 Route::get('/tambahkelas', 'TambahDataKelasController@index')->name('tambahkelas');
-Route::get('/caridatasiswa', 'DataSiswaController@index')->name('caridatasiswa');
 Route::get('/caridatakelas', 'EditDataKelasController@index')->name('caridatakelas');
-Route::get('/cariketerampilan', 'DataSiswaController@index')->name('cariketerampilan');
+Route::get('/cariketerampilan', 'KeterampilanController@index')->name('cariketerampilan');
 Route::get('/cari', 'DataSiswaController@cari')->name('cari');
 Route::get('/editdata/{id}/edit', 'TambahDataSiswaController@edit')->name('editdata');
 Route::get('/hapusdata/{id}/delete', 'TambahDataSiswaController@delete')->name('hapusdata');
@@ -37,6 +36,11 @@ Route::get('cetakketerampilan', 'KeterampilanController@cetak_pdf')->name('cetak
 Route::get('/setoraninput', 'SetoranController@index')->name('setoraninput');
 Route::get('/filter', 'DataSiswaController@datatables')->name('filter');
 Route::get('/transaksicetak', 'SetoranController@create')->name('transaksicetak');
+Route::get('/carilaporan', 'LaporanController@index')->name('carilaporan');
+Route::get('/carilaporanharian', 'LaporanHarianController@index')->name('carilaporanharian');
+Route::get('/carilaporanseluruh', 'LaporanSeluruhController@index')->name('carilaporanseluruh');
+Route::get('/caridatajurnal', 'JurnalUmumController@index')->name('caridatajurnal');
+
 
 Route::post('/tambahdata', 'TambahDataSiswaController@create')->name('tambahdata');
 Route::post('/importdatasiswa', 'ImportController@import_excel')->name('importdatasiswa');
@@ -50,6 +54,7 @@ Route::post('/updatenilai/{id}/update', 'KeterampilanController@update')->name('
     Route::resource('dashboard', 'DashboardController');
     Route::resource('datasiswa', 'DataSiswaController');
     Route::resource('laporanharian', 'LaporanHarianController');
+    Route::resource('laporanseluruh', 'LaporanSeluruhController');
     Route::resource('laporan', 'LaporanController');
     Route::resource('jurnalumum', 'JurnalUmumController');
     Route::resource('keterampilan', 'KeterampilanController');

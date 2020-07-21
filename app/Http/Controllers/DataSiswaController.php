@@ -8,6 +8,7 @@ use App\Siswa;
 use App\Kelas;
 use App\KelasMeta;
 use App\TahunAngkatan;
+use App\Transaksi;
 use Illuminate\Support\Facades\DB;
 
 class DataSiswaController extends Controller
@@ -22,6 +23,7 @@ class DataSiswaController extends Controller
 		$kelas = Kelas::all();
         $jurusan = Jurusan::all();
         $kelasmeta = KelasMeta::all();
+        $transaksi = Transaksi::all();
 
         $cari = $request->cari;
         $data_siswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 

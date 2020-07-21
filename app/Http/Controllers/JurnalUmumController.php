@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class JurnalUmumController extends Controller
 {
@@ -11,9 +12,67 @@ class JurnalUmumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('admin.jurnalumum.index');
+    public function index(Request $request)
+    {        
+        $cari = $request->cari;
+        $data_siswa = DB::table('transaksi')
+        ->select('transaksi.*','siswa1.nama','siswa1.nis','kelas1.nama_kelas')
+        ->join('siswa1','siswa1.id','=','transaksi.id_siswa')
+        ->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
+
+        $total = DB::table('transaksi')
+        ->select('transaksi.*','siswa1.nama','siswa1.nis','kelas1.nama_kelas')
+        ->join('siswa1','siswa1.id','=','transaksi.id_siswa')
+        ->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
+
+        if(!empty($request->cari)){
+            $data_siswa = $data_siswa->where('siswa1.nama','like',"%".$cari."%");
+            $total = $total->where('siswa1.nama','like',"%".$cari."%");
+        }
+        if($request->id_kelas != ''){
+            $data_siswa = $data_siswa->where('siswa1.kelas',$request->id_kelas);    
+            $total = $total->where('siswa1.kelas',$request->id_kelas);    
+        }
+        if($request->id_jurusan != ''){
+            $data_siswa = $data_siswa->where('siswa1.jurusan',$request->id_jurusan);    
+            $total = $total->where('siswa1.jurusan',$request->id_jurusan);    
+        }
+        if($request->id_kelas_meta != ''){
+            $data_siswa = $data_siswa->where('siswa1.angka',$request->id_kelas_meta);    
+            $total = $total->where('siswa1.angka',$request->id_kelas_meta);    
+        }
+
+        if($request->tanggalAwal != ''){
+            $data_siswa = $data_siswa->whereDate('transaksi.created_at','>=',$request->tanggalAwal);
+            $total = $total->whereDate('transaksi.created_at','>=',$request->tanggalAwal);
+        }else{
+            $data_siswa = $data_siswa->whereDate('transaksi.created_at','>=',date('Y-m-d',strtotime('-1 Week'))); 
+            $total = $total->whereDate('transaksi.created_at','>=',date('Y-m-d',strtotime('-1 Week'))); 
+        }
+
+        if($request->tanggalAkhir != ''){
+            $data_siswa = $data_siswa->whereDate('transaksi.created_at','<=',$request->tanggalAkhir);
+            $total = $total->whereDate('transaksi.created_at','<=',$request->tanggalAkhir);
+        } 
+        else{
+            $data_siswa = $data_siswa->whereDate('transaksi.created_at','<=',date('Y-m-d'));    
+            $total = $total->whereDate('transaksi.created_at','<=',date('Y-m-d'));    
+        }
+
+        $data_siswa = $data_siswa->paginate(5);
+        $total = $total->sum('nominal');
+        $kelas = \App\Kelas::all();
+        $jurusan = \App\Jurusan::all();
+        $kelasmeta = \App\KelasMeta::all();
+        return view('admin.jurnalumum.index', ['data_siswa' => $data_siswa->appends(['cari' => $request->cari,'tanggalAwal' => $request->tanggalAwal,'tanggalAkhir' => $request->tanggalAkhir,
+        'id_Kelas' => $request->id_kelas,  'id_jurusan' => $request->id_jurusan, 'id_kelas_meta' => $request->id_kelas_meta]),
+        'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta,'input' => $request, 'total' => $total]);
+        // echo json_encode($data_siswa);
+
     }
 
     /**

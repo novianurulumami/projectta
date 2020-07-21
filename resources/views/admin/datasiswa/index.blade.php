@@ -14,7 +14,7 @@
             <a href="{{route('export.index')}}" class="btn btn-info active" role="button" aria-pressed="true"> <i class="fa fa-file-excel-o"></i>  Export Data Siswa</a>
         <br/><br/>
 
-<form action="{{url('caridatasiswa')}}" method="GET">
+<form action="{{url('datasiswa')}}" method="GET">
     <ul class="nav nav-tabs">
       <li class="dropdown">
         <select name="id_kelas" class="form-control" id="">
@@ -41,26 +41,16 @@
            @endforeach
         </select>
       </li>
-      <button class="btn btn-default" type="submit"><i class="fa fa-search"></i>
-      </button>
+      <div class="input-group custom-search-form">
+        <input type="text" name="cari" class="form-control" placeholder="Search..." value="{{ empty($input->cari) ? '' : $input->cari}}">
+          <span class="input-group-btn">
+              <button class="btn btn-primary"  type="submit" value="CARI">
+                  <i class="fa fa-search"></i>
+              </button>
+          </span>
+      </div>
     </ul>
   </form>
-
-            <br/><br/>
-            <form action="{{url('datasiswa')}}" method="GET">
-            <div class="sidebar-search">
-                        <div class="input-group custom-search-form">
-                            <input type="text" name="cari" class="form-control" placeholder="Search..." value="{{ old('cari') }}">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary"  type="submit" value="CARI">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </input>
-                        </div>
-            </div>
-          </form>
-            
         </div>
         <section class="content">
         <div class="box">  
@@ -69,7 +59,7 @@
 
         <div class="box-body">
           <table class="table table-stripped table-bordered">
-            <thread>
+            <thead>
               <tr>
                 <th>NAMA SISWA</th>
                 <th>KELAS</th>
@@ -79,7 +69,7 @@
                 <th>JUMLAH SALDO</th>
                 <th>AKSI</th>
               </tr>
-            </thread>
+            </thead>
             @foreach($data_siswa as $datasiswa)
               <tr>
               <td>{{$datasiswa->nama}}</td>

@@ -6,7 +6,7 @@
 </div>
 <div class="col-6">
 <!-- Button trigger modal -->
-<br></br>
+<br>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> <i class="fa fa-plus"></i>   Tambah Data </button>
 <br></br>
     @if(session('sukses'))

@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Transaksi;
 
-
-class LaporanController extends Controller
+class LaporanSeluruhController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +15,7 @@ class LaporanController extends Controller
      */
     public function index(Request $request)
     {
+        //
         $cari = $request->cari;
         $data_siswa = DB::table('transaksi')
         ->select('transaksi.*','siswa1.nama','siswa1.nis','kelas1.nama_kelas')
@@ -44,52 +44,28 @@ class LaporanController extends Controller
 
         if(!empty($request->cari)){
             $data_siswa = $data_siswa->where('siswa1.nama','like',"%".$cari."%");
-           $setoran =$setoran->where('siswa1.nama','like',"%".$cari."%");
-           $penarikan =$penarikan->where('siswa1.nama','like',"%".$cari."%");
-           $saldoawal =$saldoawal->where('siswa1.nama','like',"%".$cari."%");
         }
         if($request->id_kelas != ''){
             $data_siswa = $data_siswa->where('siswa1.kelas',$request->id_kelas);   
-           $setoran =$setoran->where('siswa1.kelas',$request->id_kelas);
-           $penarikan =$penarikan->where('siswa1.kelas',$request->id_kelas);
-           $saldoawal =$saldoawal->where('siswa1.kelas',$request->id_kelas);
         }
         if($request->id_jurusan != ''){
             $data_siswa = $data_siswa->where('siswa1.jurusan',$request->id_jurusan);
-           $setoran =$setoran->where('siswa1.jurusan',$request->id_jurusan);    
-           $penarikan =$penarikan->where('siswa1.jurusan',$request->id_jurusan);    
-           $saldoawal =$saldoawal->where('siswa1.jurusan',$request->id_jurusan);    
         }
         if($request->id_kelas_meta != ''){
-            $data_siswa = $data_siswa->where('siswa1.angka',$request->id_kelas_meta); 
-           $setoran =$setoran->where('siswa1.angka',$request->id_kelas_meta);       
-           $penarikan =$penarikan->where('siswa1.angka',$request->id_kelas_meta);       
-           $saldoawal =$saldoawal->where('siswa1.angka',$request->id_kelas_meta);       
+            $data_siswa = $data_siswa->where('siswa1.angka',$request->id_kelas_meta);      
         }
 
         if($request->tanggalAwal != ''){
             $data_siswa = $data_siswa->whereDate('transaksi.created_at','>=',$request->tanggalAwal);
-           $setoran =$setoran->whereDate('transaksi.created_at','>=',$request->tanggalAwal);
-           $penarikan =$penarikan->whereDate('transaksi.created_at','>=',$request->tanggalAwal);
-           $saldoawal =$saldoawal->whereDate('transaksi.created_at','>=',$request->tanggalAwal);
         }else{
             $data_siswa = $data_siswa->whereDate('transaksi.created_at','>=',date('Y-m-d',strtotime('-1 Week'))); 
-           $setoran =$setoran->whereDate('transaksi.created_at','>=',date('Y-m-d',strtotime('-1 Week')));
-           $penarikan =$penarikan->whereDate('transaksi.created_at','>=',date('Y-m-d',strtotime('-1 Week')));
-           $saldoawal =$saldoawal->whereDate('transaksi.created_at','>=',date('Y-m-d',strtotime('-1 Week')));
         }
 
         if($request->tanggalAkhir != ''){
             $data_siswa = $data_siswa->whereDate('transaksi.created_at','<=',$request->tanggalAkhir);
-           $setoran =$setoran->whereDate('transaksi.created_at','<=',$request->tanggalAkhir);
-           $penarikan =$penarikan->whereDate('transaksi.created_at','<=',$request->tanggalAkhir);
-           $penarikan =$penarikan->whereDate('transaksi.created_at','<=',$request->tanggalAkhir);
         } 
         else{
             $data_siswa = $data_siswa->whereDate('transaksi.created_at','<=',date('Y-m-d'));    
-           $setoran =$setoran->whereDate('transaksi.created_at','<=',date('Y-m-d')); 
-           $penarikan =$penarikan->whereDate('transaksi.created_at','<=',date('Y-m-d')); 
-           $saldoawal =$saldoawal->whereDate('transaksi.created_at','<=',date('Y-m-d')); 
         }
 
 
@@ -102,8 +78,7 @@ class LaporanController extends Controller
         $kelas = \App\Kelas::all();
         $jurusan = \App\Jurusan::all();
         $kelasmeta = \App\KelasMeta::all();
-        return view('admin.laporan.index', ['data_siswa' => $data_siswa->appends(['cari' => $request->cari,'tanggalAwal' => $request->tanggalAwal,'tanggalAkhir' => $request->tanggalAkhir,
-        'id_Kelas' => $request->id_kelas,  'id_jurusan' => $request->id_jurusan, 'id_kelas_meta' => $request->id_kelas_meta]),
+        return view('admin.laporanseluruh.index', ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]),
         'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta,'input' => $request,
         'setoran' => $setoran, 'penarikan' => $penarikan, 'saldoawal' => $saldoawal, 'saldoakhir' => $saldoakhir]);
         // echo json_encode($data_siswa);
