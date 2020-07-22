@@ -13,7 +13,9 @@
             <a href="{{route('import.index')}}" class="btn btn-info active" role="button" aria-pressed="true"> <i class="fa fa-file-excel-o"></i>  Import Data Siswa</a>
             <a href="{{route('export.index')}}" class="btn btn-info active" role="button" aria-pressed="true"> <i class="fa fa-file-excel-o"></i>  Export Data Siswa</a>
         <br/><br/>
-
+<?php 
+use Illuminate\Support\Facades\DB;
+?>
 <form action="{{url('datasiswa')}}" method="GET">
     <ul class="nav nav-tabs">
       <li class="dropdown">
@@ -77,10 +79,16 @@
               <td>{{$datasiswa->nama_jurusan}}</td>
               <td>{{$datasiswa->nama_angka}}</td>
               <td>{{$datasiswa->no_rekening}}</td>
-              <td></td>
-              <td> <a href="{{route('detaildatasiswa', $datasiswa->id, 'detail')}}"><i class="fa fa-info-circle"></i></a>  | 
-              <a href="{{route('editdata', $datasiswa->id, 'edit')}}"><i class="fa fa-edit"></i></a>   |
-              <a href="{{route('hapusdata', $datasiswa->id, 'delete')}}"> <i class="fa fa-trash"></i> </a></td>
+              <td>
+                <?php $id = $datasiswa->id ;
+                ?>
+                {{ 
+                DB::table('transaksi')->where('status_transaksi','Saldo Awal')->where('id_siswa',$datasiswa->id)->sum('nominal')+
+                DB::table('transaksi')->where('status_transaksi','Setoran')->where('id_siswa',$datasiswa->id)->sum('nominal')-
+                DB::table('transaksi')->where('status_transaksi','Penarikan')->where('id_siswa',$datasiswa->id)->sum('nominal') }}
+              </td>
+              <td> <a href="{{route('detailsaldosiswa', $datasiswa->id, 'detailsaldo')}}"><i class="fa fa-info-circle"></i></a>  | 
+              <a href="{{route('hapusdata', $datasiswa->id, 'delete')}}"> <i class="fa fa-trash" onclick="return confirm('Hapus permanen data ini?')"></i> </a></td>
               </tr>
             @endforeach
             <tbody>

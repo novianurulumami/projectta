@@ -15,6 +15,44 @@
         </div>
     @endif
 </div>
+<form action="{{route('tambahdatasiswa.index')}}" method="GET">
+  <ul class="nav nav-tabs">
+    <li class="dropdown">
+      <select name="id_kelas" class="form-control" id="">
+        <option value="" selected>Semua</option>
+        @foreach ($kelas as $key => $item)
+        <option value="{{$item->id_kelas}}" {{($item->id_kelas == $input->id_kelas) ? "selected" : ""}}>
+          {{$item->nama_kelas}}</option>
+        @endforeach
+      </select>
+    </li>
+    <li class="dropdown">
+      <select name="id_jurusan" class="form-control" id="">
+        <option value="" selected>Semua</option>
+        @foreach ($jurusan as $key => $item )
+              <option value="{{$item->id_jurusan}}" {{$item->id_jurusan == $input->id_jurusan ? "selected" : ""}}>{{$item->nama_jurusan}}</option>
+        @endforeach
+      </select>
+    </li>
+    <li class="dropdown">
+      <select name="id_kelas_meta" class="form-control" id="">
+        <option value="" selected>Semua</option>
+        @foreach ($kelasmeta as $key => $item)
+        <option value="{{$item->id_kelas_meta}}" {{$item->id_kelas_meta == $input->id_kelas_meta  ? "selected" : ""}}>{{$item->nama_angka}}</option>
+         @endforeach
+      </select>
+    </li>
+    <div class="input-group custom-search-form">
+      <input type="text" name="cari" class="form-control" placeholder="Search..." value="{{ empty($input->cari) ? '' : $input->cari}}">
+        <span class="input-group-btn">
+            <button class="btn btn-primary"  type="submit" value="CARI">
+                <i class="fa fa-search"></i>
+            </button>
+        </span>
+    </div>
+  </ul>
+</form>
+<br></br>
 <div class="box-body">
 <table class="table table-hover table-stripped table-bordered" >
             <thead>
@@ -42,7 +80,7 @@
               <td>{{$datasiswa->jenis_kelamin}}</td>
               <td> <a href="{{route('detaildatasiswa', $datasiswa->id, 'detail')}}"><i class="fa fa-info-circle"></i></a>  | 
               <a href="{{route('editdata', $datasiswa->id, 'edit')}}"><i class="fa fa-edit"></i></a>   |
-              <a href="{{route('hapusdata', $datasiswa->id, 'delete')}}"> <i class="fa fa-trash"></i> </a></td>
+              <a href="{{route('hapusdata', $datasiswa->id, 'delete')}}"> <i class="fa fa-trash" onclick="return confirm('Hapus permanen data ini?')"></i> </a></td>
               </tr>
             @endforeach
           </table>

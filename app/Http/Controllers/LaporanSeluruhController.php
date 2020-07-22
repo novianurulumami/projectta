@@ -55,20 +55,7 @@ class LaporanSeluruhController extends Controller
             $data_siswa = $data_siswa->where('siswa1.angka',$request->id_kelas_meta);      
         }
 
-        if($request->tanggalAwal != ''){
-            $data_siswa = $data_siswa->whereDate('transaksi.created_at','>=',$request->tanggalAwal);
-        }else{
-            $data_siswa = $data_siswa->whereDate('transaksi.created_at','>=',date('Y-m-d',strtotime('-1 Week'))); 
-        }
-
-        if($request->tanggalAkhir != ''){
-            $data_siswa = $data_siswa->whereDate('transaksi.created_at','<=',$request->tanggalAkhir);
-        } 
-        else{
-            $data_siswa = $data_siswa->whereDate('transaksi.created_at','<=',date('Y-m-d'));    
-        }
-
-
+      
         $data_siswa = $data_siswa->paginate(10);
         $setoran =$setoran->where('status_transaksi','Setoran')->sum('nominal');
         $penarikan =$penarikan->where('status_transaksi','Penarikan')->sum('nominal');

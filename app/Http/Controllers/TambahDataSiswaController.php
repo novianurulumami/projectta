@@ -28,12 +28,24 @@ class TambahDataSiswaController extends Controller
         if(!empty($request->cari)){
             $data_siswa = $data_siswa->where('nama','like',"%".$cari."%");
         }
+        if($request->id_kelas != ''){
+            $data_siswa = $data_siswa->where('id_kelas',$request->id_kelas);    
+        }
+        if($request->id_jurusan != ''){
+            $data_siswa = $data_siswa->where('id_jurusan',$request->id_jurusan);    
+        }
+        if($request->id_kelas_meta != ''){
+            $data_siswa = $data_siswa->where('id_kelas_meta',$request->id_kelas_meta);    
+        }
         $data_siswa = $data_siswa->paginate(5);
         $kelas = \App\Kelas::all();
         $jurusan = \App\Jurusan::all();
         $kelasmeta = \App\KelasMeta::all();
         $data_tahun = \App\TahunAngkatan::all();
-        return view('admin.datasiswa.add', ['data_tahun' => $data_tahun], ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]), 'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
+        return view('admin.datasiswa.add', ['data_tahun' => $data_tahun], 
+        ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]), 'kelas' => $kelas, 
+        'input' => $request,
+        'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
         // echo json_encode($data_siswa);
 
     }

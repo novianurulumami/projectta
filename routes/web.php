@@ -40,6 +40,7 @@ Route::get('/carilaporan', 'LaporanController@index')->name('carilaporan');
 Route::get('/carilaporanharian', 'LaporanHarianController@index')->name('carilaporanharian');
 Route::get('/carilaporanseluruh', 'LaporanSeluruhController@index')->name('carilaporanseluruh');
 Route::get('/caridatajurnal', 'JurnalUmumController@index')->name('caridatajurnal');
+Route::get('/detailsaldosiswa/{id}/detailsaldo', 'DataSiswaController@show')->name('detailsaldosiswa');
 
 
 Route::post('/tambahdata', 'TambahDataSiswaController@create')->name('tambahdata');
@@ -52,6 +53,7 @@ Route::post('/updatenilai/{id}/update', 'KeterampilanController@update')->name('
 
 
     Route::resource('dashboard', 'DashboardController');
+    Route::resource('tambahdatasiswa', 'TambahDataSiswaController');
     Route::resource('datasiswa', 'DataSiswaController');
     Route::resource('laporanharian', 'LaporanHarianController');
     Route::resource('laporanseluruh', 'LaporanSeluruhController');

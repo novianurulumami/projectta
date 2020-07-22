@@ -41,11 +41,15 @@
       </select>
     </li>
     <div class="input-group custom-search-form">
-    <input type="text" name="cari" class="form-control" placeholder="Search..." value="{{ empty($input->cari) ? '' : $input->cari}}">
+      <input type="text" name="cari" class="form-control" placeholder="Search..." value="{{ empty($input->cari) ? '' : $input->cari}}">
         <span class="input-group-btn">
+            <button class="btn btn-primary"  type="submit" value="CARI">
+                <i class="fa fa-search"></i>
+            </button>
         </span>
     </div>
   </ul>
+</form>
 <br>
 <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="x_panel">

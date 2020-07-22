@@ -24,6 +24,8 @@ class DataSiswaController extends Controller
         $jurusan = Jurusan::all();
         $kelasmeta = KelasMeta::all();
         $transaksi = Transaksi::all();
+        // $data_siswa = '';
+        // $saldo = '';
 
         $cari = $request->cari;
         $data_siswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
@@ -42,12 +44,16 @@ class DataSiswaController extends Controller
         if($request->id_kelas_meta != ''){
             $data_siswa = $data_siswa->where('id_kelas_meta',$request->id_kelas_meta);    
         }
-        $data_siswa = $data_siswa->paginate(5);
-        
+        $data_siswa = $data_siswa->paginate(10);
+        $setoran = DB::table('transaksi');
+        $penarikan = Transaksi::where('status_transaksi','Penarikan');
+
         return view('admin.datasiswa.index', ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]),
          'kelas' => $kelas, 
          'input' => $request,
          'jurusan' => $jurusan, 
+         'setoran' => $setoran,
+         'penarikan' => $penarikan,
          'kelasmeta' => $kelasmeta]);
         
 
@@ -84,6 +90,18 @@ class DataSiswaController extends Controller
     public function show($id)
     {
         //
+        $datasiswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('tahun_angkatan','tahun_angkatan.id_tahun_angkatan','=','siswa1.tahun_angkatan')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
+        ->where('siswa1.id', $id)
+        ->first();
+        $kelas = \App\Kelas::all();
+        $jurusan = \App\Jurusan::all();
+        $kelasmeta = \App\KelasMeta::all();
+        $data_tahun = \App\TahunAngkatan::all();
+        return view('admin.datasiswa.detailsaldo', ['data_tahun' => $data_tahun], ['datasiswa' => $datasiswa], ['kelas' => $kelas], ['jurusan' => $jurusan], ['kelasmeta' => $kelasmeta]);
+
     }
 
     /**

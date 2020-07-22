@@ -31,9 +31,10 @@ class SetoranController extends Controller
             if(empty($datasiswa)){
                 return redirect('setoraninput')->with('gagal', 'NIS tidak terdaftar');
                 }
+            $saldoawal = Transaksi::where('id_siswa',$datasiswa->id)->where('status_transaksi','Saldo Awal')->sum('nominal');
             $setoran = Transaksi::where('id_siswa',$datasiswa->id)->where('status_transaksi','Setoran')->sum('nominal');
             $penarikan = Transaksi::where('id_siswa',$datasiswa->id)->where('status_transaksi','Penarikan')->sum('nominal');
-            $saldo = $setoran - $penarikan;
+            $saldo = $setoran - $penarikan + $saldoawal;
 
             // masukan source code print
             
