@@ -10,6 +10,8 @@ use App\KelasMeta;
 use App\TahunAngkatan;
 use App\Transaksi;
 use Illuminate\Support\Facades\DB;
+use PDF;
+
 
 class DataSiswaController extends Controller
 {
@@ -90,7 +92,8 @@ class DataSiswaController extends Controller
     public function show($id)
     {
         //
-        $datasiswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        $datasiswa = DB::table('siswa1')
+        ->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
         ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
         ->join('tahun_angkatan','tahun_angkatan.id_tahun_angkatan','=','siswa1.tahun_angkatan')
         ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
@@ -100,8 +103,14 @@ class DataSiswaController extends Controller
         $jurusan = \App\Jurusan::all();
         $kelasmeta = \App\KelasMeta::all();
         $data_tahun = \App\TahunAngkatan::all();
-        return view('admin.datasiswa.detailsaldo', ['data_tahun' => $data_tahun], ['datasiswa' => $datasiswa], ['kelas' => $kelas], ['jurusan' => $jurusan], ['kelasmeta' => $kelasmeta]);
+        
 
+        $transaksi = Transaksi::where('id_siswa', $id)->paginate(2);
+        $setoran = DB::table('transaksi');
+        $penarikan = Transaksi::where('status_transaksi','Penarikan');
+        
+        return view('admin.datasiswa.detailsaldo', ['datasiswa' => $datasiswa],
+        ['transaksi' => $transaksi]);
     }
 
     /**
@@ -127,41 +136,30 @@ class DataSiswaController extends Controller
     {
         //
     }
-    
-    // public function datatables()
-    // {
-    //     //
-    //     $query = Product::select('id', 'nama', 'kelas', 'jurusan', 'angka', 'no_rekening')->orderBy('id');
-    //     if (request('angka')) {
-    //         $filter_periode = now()->subDays(request('angka'))->toDateString();
-    //         $query->where('created_at', '>=', $angka);
-    //     }
 
-    //     return datatables($query)->toJson();
-    // }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
     }
 
-    // public function cari(Request $request)
-	// {
-	// 	// menangkap data pencarian
-	// 	$cari = $request->cari;
- 
-    // 		// mengambil data dari table pegawai sesuai pencarian data
-    //     $data_siswa = \App\Siswa::where('nama','like',"%".$cari."%")
-	// 	->paginate();
- 
-    // 		// mengirim data pegawai ke view index
-    //     return view('admin.datasiswa.index', ['data_siswa' => $data_siswa]);
+    public function cetak_pdfsaldo($id)
+    {
+        $data_siswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
+        ->where('siswa1.id', $id)
+        ->first();
 
-    // }
+        $datasiswa = \App\Siswa::all();
+        $kelas = \App\Kelas::all();
+        $jurusan = \App\Jurusan::all();
+        $kelasmeta = \App\KelasMeta::all();
+
+        $transaksi = Transaksi::where('id_siswa', $id)->get();
+
+    	$pdf = PDF::loadview('admin.datasiswa.pdfdetailsaldo', ['datasiswa' => $datasiswa, 'transaksi' => $transaksi], ['data_siswa' => $data_siswa])->setPaper('A4', 'potrait');
+    	return $pdf->stream('SaldoSiswa.pdf');
+    }
+
 
 }

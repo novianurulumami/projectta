@@ -13,7 +13,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard.index');
+        $siswa = \App\Siswa::all();
+        $transaksi = \App\Transaksi::all();
+
+        $categories =[];
+        foreach ($transaksi as $key) {
+            $categories[] = $key->status_transaksi;
+        }
+        dd($categories);
+        return view('admin.dashboard.index', ['siswa' => $siswa, 'transaksi' => $transaksi]);
     }
 
     /**

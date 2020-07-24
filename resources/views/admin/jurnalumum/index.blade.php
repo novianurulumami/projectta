@@ -49,7 +49,7 @@
         </span>
     </div>
   </ul>
-</form>
+
 <br>
 <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -62,10 +62,10 @@
                        <label for="nama">Periode :</label>
                      <div class="well" style="overflow: auto">
                       <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 8px;">
-                       
+                           
                       <div class="input-group">
                           <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
-                          <input type="date" class="form-control" name="tanggalAwal" @if (empty($input->tanggalAwal)) value="{{ date('Y-m-d',strtotime('-1 Week'))}}" @else value="{{$input->tanggalAwal}}" @endif >
+                      <input type="date" class="form-control" name="tanggalAwal" @if (empty($input->tanggalAwal)) value="{{ date('Y-m-d',strtotime('-1 Week'))}}" @else value="{{$input->tanggalAwal}}" @endif >
                       </div>
 
                       </div>
@@ -75,11 +75,13 @@
                       <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 8px;">
                         <div class="input-group">
                           <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
-                          <input type="date" class="form-control" name="tanggalAkhir" @if (empty($input->tanggalAkhir)) value="{{ date('Y-m-d')}}" @else value="{{$input->tanggalAkhir}}" @endif>
+                            <input type="date" class="form-control" name="tanggalAkhir" @if (empty($input->tanggalAkhir)) value="{{ date('Y-m-d')}}" @else value="{{$input->tanggalAkhir}}" @endif>
                       </div>
                       </div>
                       <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 8px;">
                       <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                        
+                    </form> 
                         
                     </form>   
                          

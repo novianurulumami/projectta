@@ -33,6 +33,9 @@ Route::get('/updatenilaiketerampilan', 'KeterampilanController@index')->name('up
 Route::get('/hapusnilai/{id}/delete', 'KeterampilanController@delete')->name('hapusnilai');
 Route::get('exportdata', 'ExportController@export_excel')->name('exportdata');
 Route::get('cetakketerampilan', 'KeterampilanController@cetak_pdf')->name('cetakketerampilan');
+Route::get('cetaklaporan', 'LaporanController@cetak_pdflaporan')->name('cetaklaporan');
+Route::get('cetakdetailsaldo/{id}/cetakdetailsaldo', 'DataSiswaController@cetak_pdfsaldo')->name('cetakdetailsaldo');
+
 Route::get('/setoraninput', 'SetoranController@index')->name('setoraninput');
 Route::get('/filter', 'DataSiswaController@datatables')->name('filter');
 Route::get('/transaksicetak', 'SetoranController@create')->name('transaksicetak');
@@ -41,7 +44,7 @@ Route::get('/carilaporanharian', 'LaporanHarianController@index')->name('carilap
 Route::get('/carilaporanseluruh', 'LaporanSeluruhController@index')->name('carilaporanseluruh');
 Route::get('/caridatajurnal', 'JurnalUmumController@index')->name('caridatajurnal');
 Route::get('/detailsaldosiswa/{id}/detailsaldo', 'DataSiswaController@show')->name('detailsaldosiswa');
-
+Route::get('/detailtransaksisiswa/{id}/detailtransaksi', 'DetailTransaksiController@show')->name('detailtransaksi');
 
 Route::post('/tambahdata', 'TambahDataSiswaController@create')->name('tambahdata');
 Route::post('/importdatasiswa', 'ImportController@import_excel')->name('importdatasiswa');
@@ -65,6 +68,7 @@ Route::post('/updatenilai/{id}/update', 'KeterampilanController@update')->name('
     Route::resource('import', 'ImportController');
     Route::resource('export', 'ExportController');
     Route::resource('setoran', 'SetoranController');
+    Route::resource('detailtransaksisiswa', 'DetailTransaksiController');
     Route::resource('penarikan', 'PenarikanController');
     Route::resource('cetak', 'SetoranCetakController');
     Route::resource('restore', 'RestoreDataController');

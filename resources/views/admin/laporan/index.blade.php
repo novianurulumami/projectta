@@ -102,19 +102,19 @@
     <div class="form-group row">
     <label for="email" class="col-md-4 col-form-label font-weight-normal"><h5>Saldo Awal</h5></label>
     <div class="col-md-4">
-    <input id="" type="" class="form-control " name="" value="{{$saldoawal}}" required disabled>
+    <input id="" type="" class="form-control " name="" value="{{'Rp. '.$saldoawal}}" required disabled>
     </div>
     <label for="email" class="col-md-4 col-form-label font-weight-normal"><h5>Total Setoran</h5></label>
     <div class="col-md-4">
-        <input id="" type="" class="form-control " name="" value="{{ $setoran }}" disabled>
+        <input id="" type="" class="form-control " name="" value="{{'Rp. '.$setoran }}" disabled>
     </div>
     <label for="email" class="col-md-4 col-form-label font-weight-normal"><h5>Total Penarikan</h5></label>
     <div class="col-md-4">
-    <input id="" type="" class="form-control " name="" value="{{$penarikan}}" disabled>
+    <input id="" type="" class="form-control " name="" value="{{'Rp. '.$penarikan}}" disabled>
     </div>
     <label for="email" class="col-md-4 col-form-label font-weight-normal"><h5>Saldo Akhir</h5></label>
     <div class="col-md-4">
-    <input id="" type="" class="form-control " name="" value="{{$saldoakhir}}" disabled>
+    <input id="" type="" class="form-control " name="" value="{{'Rp. '.$saldoakhir}}" disabled>
     </div>
     </div>
     <div class="box-body">
@@ -149,7 +149,8 @@
           </table>
           {{ $data_siswa->links() }}
 
-        <button type='button' class='btn btn-primary center-block'> Cetak </button>
+          <a href="{{route('cetaklaporan')}}" class="btn btn-primary" target="_blank">CETAK</a>
+
 <script type="text/javascript">
 
     $('.date').datepicker({  

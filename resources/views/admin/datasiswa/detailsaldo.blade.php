@@ -8,10 +8,10 @@
         {{session('sukses')}}
         </div>
     @endif
-
+    <?php 
+    use Illuminate\Support\Facades\DB;
+    ?>
     <div class="box-body">
-        <form method="POST" action="{{route('detailsaldosiswa', $datasiswa->id, 'detailsaldo')}}">
-          {{csrf_field()}}
           <table class="table table-hover table-stripped table-bordered" >
             <thead>
               <tr>
@@ -31,23 +31,66 @@
               <td>{{$datasiswa->nama}}</td>
               <td>{{$datasiswa->nama_kelas}}</td>
               <td>{{$datasiswa->nama_jurusan}}</td>
-              <td>{{$datasiswa->nama_angka}}</td>
-              <td>{{$datasiswa->tahun}}</td>
-              <td>{{$datasiswa->jenis_kelamin}}</td>
+              <td><?php $id = $datasiswa->id ;
+                ?>
+                Rp. {{ 
+                DB::table('transaksi')->where('status_transaksi','Saldo Awal')->where('id_siswa',$datasiswa->id)->sum('nominal')+
+                DB::table('transaksi')->where('status_transaksi','Setoran')->where('id_siswa',$datasiswa->id)->sum('nominal')}}
+              </td>
+              <td><?php $id = $datasiswa->id ;
+                ?>
+                Rp. {{ 
+                DB::table('transaksi')->where('status_transaksi','Penarikan')->where('id_siswa',$datasiswa->id)->sum('nominal') }}
+              </td>
+              <td> 
+                <?php $id = $datasiswa->id ;
+                ?>
+                Rp. {{ 
+                DB::table('transaksi')->where('status_transaksi','Saldo Awal')->where('id_siswa',$datasiswa->id)->sum('nominal')+
+                DB::table('transaksi')->where('status_transaksi','Setoran')->where('id_siswa',$datasiswa->id)->sum('nominal')-
+                DB::table('transaksi')->where('status_transaksi','Penarikan')->where('id_siswa',$datasiswa->id)->sum('nominal') }}
+              </td>
               </tr>
           </table>
-          {{-- <div class="form-group">
-            <p>NIS : {{$datasiswa->nis}}</p>
-            <p>No Rekening : {{$datasiswa->no_rekening}}</p>
-            <p>Nama Lengkap : {{$datasiswa->nama}}</p>
-            <p>Tahun Angkatan : {{$datasiswa->tahun_angkatan}}</p>
-            <p>Kelas : {{$datasiswa->nama_kelas}}</p>
-            <p>Jurusan : {{$datasiswa->nama_jurusan}}</p>
-            <p>Angka : {{$datasiswa->nama_angka}}</p>
-            <p>Jenis Kelamin : {{$datasiswa->jenis_kelamin}}</p>
-            <p>Alamat : {{$datasiswa->alamat}}</p>
-            <p>No Telepon : {{$datasiswa->no_telepon}}</p>
-          </div> --}}
-        </form>
+
+<h3>Detail Transaksi Siswa</h3>
+<div class="box-body">
+    <table class="table table-stripped table-bordered">
+      <thead>
+        <tr>
+          <th>Tanggal</th>
+          <th>STATUS TRANSAKSI</th>
+          <th>DEBIT</th>
+          <th>KREDIT</th>
+      </thead>
+      
+      <tbody>
+        @foreach ($transaksi as $item)
+      <tr>
+        <td> {{$item->created_at}} </td>
+        <td> {{$item->status_transaksi}} </td>
+        <td> {{$item->status_transaksi == 'Setoran' ? $item->nominal : '' }}
+          {{$item->status_transaksi == 'Saldo Awal' ? $item->nominal : '' }}
+          {{$item->status_transaksi == 'Penarikan' ? '-' : '' }}</td>
+        <td>{{$item->status_transaksi == 'Penarikan' ? $item->nominal : '-' }}</td>
+      </tr>
+      @endforeach
+      </tbody>
+    </table>
+    {{$transaksi->links()}}
+
+    <a href="{{route('cetakdetailsaldo', $datasiswa->id, 'cetakdetailsaldo')}}" class="btn btn-primary" target="_blank">CETAK</a>
+
+<script type="text/javascript">
+
+$('.date').datepicker({  
+
+ format: 'mm-dd-yyyy'
+
+});  
+
+</script>  
+       
 </div>
+</div> 
 @endsection

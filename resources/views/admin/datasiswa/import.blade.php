@@ -70,7 +70,7 @@
             <td>{{$datasiswa->nama_kelas}}</td>
             <td>{{$datasiswa->nama_jurusan}}</td>
             <td>{{$datasiswa->nama_angka}}</td>
-            <td>{{$datasiswa->tahun_angkatan}}</td>
+            <td>{{$datasiswa->tahun}}</td>
             <td>{{$datasiswa->jenis_kelamin}}</td>
             <td>{{$datasiswa->alamat}}</td>
             </tr>

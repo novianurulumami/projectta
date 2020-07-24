@@ -26,11 +26,11 @@
     <div class="form-group row">
     <div class="col-md-4">
       <label for="email" class="col-md-12 col-form-label font-weight-normal"><h5>Modal Awal Keseluruhan</h5></label>
-      <input id="" type="" class="form-control " name="" value="{{$saldoawal}}" required disabled>
+      <input id="" type="" class="form-control " name="" value="{{'Rp. '.$saldoawal}}" required disabled>
     </div>
     <div class="col-md-4">
       <label for="email" class="col-md-12 col-form-label font-weight-normal"><h5>Modal Akhir Keseluruhan</h5></label>
-        <input id="" type="" class="form-control " name="" value="{{$saldoakhir}}" disabled>
+        <input id="" type="" class="form-control " name="" value="{{'Rp. '.$saldoakhir}}" disabled>
     </div>
     </div>
     <div class="form-group row">
@@ -39,11 +39,11 @@
       <div class="form-group row">
         <div class="col-md-4">
           <label for="email" class="col-md-12 col-form-label font-weight-normal"><h5>Saldo Dedit Keseluruhan</h5></label>
-           <input id="" type="" class="form-control " name="" value="{{ $setoran }}" disabled>
+           <input id="" type="" class="form-control " name="" value="{{'Rp. '.$setoran }}" disabled>
         </div>
         <div class="col-md-4">
           <label for="email" class="col-md-12 col-form-label font-weight-normal"><h5>Saldo Kredit Keseluruhan</h5></label>
-          <input id="" type="" class="form-control " name="" value="{{$penarikan}}" disabled>
+          <input id="" type="" class="form-control " name="" value="{{'Rp. '.$penarikan}}" disabled>
         </div>
         </div>
         

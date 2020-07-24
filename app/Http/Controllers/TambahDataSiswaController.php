@@ -42,8 +42,8 @@ class TambahDataSiswaController extends Controller
         $jurusan = \App\Jurusan::all();
         $kelasmeta = \App\KelasMeta::all();
         $data_tahun = \App\TahunAngkatan::all();
-        return view('admin.datasiswa.add', ['data_tahun' => $data_tahun], 
-        ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]), 'kelas' => $kelas, 
+        return view('admin.datasiswa.add',
+        ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]), 'kelas' => $kelas, 'data_tahun' => $data_tahun,
         'input' => $request,
         'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
         // echo json_encode($data_siswa);

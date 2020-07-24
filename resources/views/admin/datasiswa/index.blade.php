@@ -82,13 +82,13 @@ use Illuminate\Support\Facades\DB;
               <td>
                 <?php $id = $datasiswa->id ;
                 ?>
-                {{ 
+                Rp. {{
                 DB::table('transaksi')->where('status_transaksi','Saldo Awal')->where('id_siswa',$datasiswa->id)->sum('nominal')+
                 DB::table('transaksi')->where('status_transaksi','Setoran')->where('id_siswa',$datasiswa->id)->sum('nominal')-
                 DB::table('transaksi')->where('status_transaksi','Penarikan')->where('id_siswa',$datasiswa->id)->sum('nominal') }}
               </td>
               <td> <a href="{{route('detailsaldosiswa', $datasiswa->id, 'detailsaldo')}}"><i class="fa fa-info-circle"></i></a>  | 
-              <a href="{{route('hapusdata', $datasiswa->id, 'delete')}}"> <i class="fa fa-trash" onclick="return confirm('Hapus permanen data ini?')"></i> </a></td>
+                <a href="{{route('hapusdata', $datasiswa->id, 'delete')}}"> <i class="fa fa-trash" onclick="return confirm('Hapus permanen data ini?')"></i> </a></td>
               </tr>
             @endforeach
             <tbody>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Transaksi;
+use PDF;
+
 
 
 class LaporanController extends Controller
@@ -114,6 +116,27 @@ class LaporanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function cetak_pdflaporan()
+    {
+        $data_siswa = DB::table('transaksi')
+        ->select('transaksi.*','siswa1.nama','siswa1.nis','kelas1.nama_kelas')
+        ->join('siswa1','siswa1.id','=','transaksi.id_siswa')
+        ->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
+        ->get();
+
+        $datasiswa = \App\Siswa::all();
+        $kelas = \App\Kelas::all();
+        $jurusan = \App\Jurusan::all();
+        $kelasmeta = \App\KelasMeta::all();
+        
+
+    	$pdf = PDF::loadview('admin.laporan.pdflaporancustom', ['datasiswa' => $datasiswa,], ['data_siswa' => $data_siswa])->setPaper('A4', 'potrait');
+    	return $pdf->stream('Laporancustom.pdf');
+    }
+
     public function create()
     {
         //

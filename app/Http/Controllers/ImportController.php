@@ -24,6 +24,7 @@ class ImportController extends Controller
         $data_siswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
         ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
         ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
+        ->join('tahun_angkatan','tahun_angkatan.id_tahun_angkatan','=','siswa1.tahun_angkatan')
         ->orderBy('id_kelas')->orderBy('id_jurusan')->orderBy('id_kelas_meta');
         if(!empty($request->cari)){
             $data_siswa = $data_siswa->where('nama','like',"%".$cari."%");
@@ -32,7 +33,9 @@ class ImportController extends Controller
         $kelas = \App\Kelas::all();
         $jurusan = \App\Jurusan::all();
         $kelasmeta = \App\KelasMeta::all();
-        return view('admin.datasiswa.import',  ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]), 'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
+        $data_tahun = \App\TahunAngkatan::all();
+
+        return view('admin.datasiswa.import',  ['data_siswa' => $data_siswa->appends(['cari' => $request->cari]), 'data_tahun' => $data_tahun, 'kelas' => $kelas, 'jurusan' => $jurusan, 'kelasmeta' => $kelasmeta]);
         // echo json_encode($data_siswa);
     }
 
