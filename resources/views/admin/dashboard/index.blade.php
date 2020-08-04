@@ -1,10 +1,14 @@
 @extends('layouts.admin')
 @section('content')
+<!DOCTYPE html>
+<html>
+<body>
 <h3>SIAPTASI (Sistem Aplikasi Tabungan Siswa)</h3>
-<div class="panel">
+<div class="col-md-12 col-sm-12 col-xs-12">
      <div id="grafiktransaksi"></div>
 </div>
-<script src="https://code.highcharts.com/highcharts.js"></script>
+<br><br>
+<script src="{{asset('js/grafik.js')}}"></script>
 <script>
 Highcharts.chart('grafiktransaksi', {
      chart: {
@@ -17,10 +21,7 @@ Highcharts.chart('grafiktransaksi', {
          text: ''
      },
      xAxis: {
-         categories: [
-             'januari',
-             'Februari'
-         ],
+         categories: {!!json_encode($bulan)!!},
          crosshair: true
      },
      yAxis: {
@@ -32,7 +33,7 @@ Highcharts.chart('grafiktransaksi', {
      tooltip: {
          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-             '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+             '<td style="padding:0"><b>RP. {point.y:.2f} </b></td></tr>',
          footerFormat: '</table>',
          shared: true,
          useHTML: true
@@ -44,19 +45,22 @@ Highcharts.chart('grafiktransaksi', {
          }
      },
      series: [{
-         name: 'Tokyo',
-         data: [49.9, 71.5]
- 
-     }, {
-         name: 'New York',
-         data: [83.6, 78.8]
- 
-     }, {
-         name: 'London',
-         data: [48.9, 38.8]
- 
-     }]
+        name: 'Saldo Awal',
+        data: {!!json_encode($saldo)!!}
+
+    }, {
+        name: 'Setoran',
+        data: {!!json_encode($setoran)!!}
+
+    }, {
+        name: 'Penarikan',
+        data: {!!json_encode($penarikan)!!}
+
+    }]
  });
               
  </script>
-@stop
+ </body>
+</html>
+ @stop
+ 

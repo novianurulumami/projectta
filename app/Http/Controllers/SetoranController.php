@@ -21,6 +21,8 @@ class SetoranController extends Controller
     {
         $datasiswa = '';
         $saldo = '';
+        $setoran = '';
+        $penarikan = '';
 
         if($request->nis != NULL){
         $datasiswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
@@ -34,13 +36,13 @@ class SetoranController extends Controller
             $saldoawal = Transaksi::where('id_siswa',$datasiswa->id)->where('status_transaksi','Saldo Awal')->sum('nominal');
             $setoran = Transaksi::where('id_siswa',$datasiswa->id)->where('status_transaksi','Setoran')->sum('nominal');
             $penarikan = Transaksi::where('id_siswa',$datasiswa->id)->where('status_transaksi','Penarikan')->sum('nominal');
-            $saldo = $setoran - $penarikan + $saldoawal;
+            $saldo = $saldoawal + $setoran - $penarikan;
 
             // masukan source code print
             
         }
 
-        return view('admin.setoran.index', ['datasiswa' => $datasiswa, 'saldo' => $saldo]);
+        return view('admin.setoran.index', ['datasiswa' => $datasiswa, 'saldo' => $saldo, 'setoran' => $setoran, 'penarikan' => $penarikan]);
 
     }
 
@@ -67,11 +69,14 @@ class SetoranController extends Controller
             'id_siswa' => 'required|numeric',
          ]);
         $cek_transaksi = Transaksi::where('id_siswa',$request->id_siswa)->count();
+        $saldoawal = Transaksi::where('id_siswa',$request->id)->where('status_transaksi','Saldo Awal')->sum('nominal');
         $setoran = Transaksi::where('id_siswa',$request->id_siswa)->where('status_transaksi','Setoran')->sum('nominal');
         $penarikan = Transaksi::where('id_siswa',$request->id_siswa)->where('status_transaksi','Penarikan')->sum('nominal');
-        $saldo = $setoran - $penarikan;
+        $saldo = $saldoawal + $setoran - $penarikan;
 
         if($cek_transaksi>0 && $request->status_transaksi=="Setoran")
+        Transaksi::create($request->all());
+        elseif($cek_transaksi>0 && $request->status_transaksi=="Penarikan")
         Transaksi::create($request->all());
         elseif($cek_transaksi==0 && $request->status_transaksi=="Setoran"){
             $data = new Transaksi;
@@ -86,7 +91,6 @@ class SetoranController extends Controller
         }elseif($request->nominal>$saldo){
             return redirect('setoraninput')->with('gagal', 'Saldo tidak mencukupi untuk melakukan penarikan');
         }
-
         return redirect('setoraninput')->with('sukses', 'Data Berhasil Diinput');
     }
 

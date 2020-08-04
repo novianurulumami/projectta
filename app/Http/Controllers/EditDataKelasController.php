@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Jurusan;
+use App\Siswa;
+use App\Kelas;
+use App\KelasMeta;
 
 class EditDataKelasController extends Controller
 {
@@ -18,7 +22,8 @@ class EditDataKelasController extends Controller
 
         $data_siswa = DB::table('siswa1')->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
         ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
-        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
+        ->orderBy('id_kelas')->orderBy('id_jurusan')->orderBy('id_kelas_meta');
         if(!empty($request->cari)){
             $data_siswa = $data_siswa->where('nama','like',"%".$cari."%");
         }
@@ -31,7 +36,7 @@ class EditDataKelasController extends Controller
         if($request->id_kelas_meta != ''){
             $data_siswa = $data_siswa->where('id_kelas_meta',$request->id_kelas_meta);    
         }
-        $data_siswa = $data_siswa->paginate(5);
+        $data_siswa = $data_siswa->paginate(10);
         $kelas = \App\Kelas::all();
         $jurusan = \App\Jurusan::all();
         $kelasmeta = \App\KelasMeta::all();
@@ -108,4 +113,19 @@ class EditDataKelasController extends Controller
     {
         //
     }
+
+    public function updateKelas(Request $request)
+    {
+        $angka_ubah;
+        $jurusan_ubah;
+        $data = Siswa::where('kelas',$request->kelas_awal);
+
+        $data = $data->update([
+            'kelas' => $request->kelas_ubah
+            
+        ]);
+
+       return redirect('datakelas')->with('sukses', 'Data Berhasil Di update');
+    }
+
 }

@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'AdminUsersController@index')->name('home');
 Route::get('/tambah', 'TambahDataSiswaController@index')->name('tambah');
+Route::get('/tambahharian', 'LaporanHarianController@index')->name('tambahharian');
 Route::get('/importberhasil', 'ImportController@index')->name('importberhasil');
 Route::get('/tambahjurusan', 'TambahDataKelasController@index')->name('tambahjurusan');
 Route::get('/tambahkelas', 'TambahDataKelasController@index')->name('tambahkelas');
@@ -33,7 +34,6 @@ Route::get('/updatenilaiketerampilan', 'KeterampilanController@index')->name('up
 Route::get('/hapusnilai/{id}/delete', 'KeterampilanController@delete')->name('hapusnilai');
 Route::get('exportdata', 'ExportController@export_excel')->name('exportdata');
 Route::get('cetakketerampilan', 'KeterampilanController@cetak_pdf')->name('cetakketerampilan');
-Route::get('cetaklaporan', 'LaporanController@cetak_pdflaporan')->name('cetaklaporan');
 Route::get('cetakdetailsaldo/{id}/cetakdetailsaldo', 'DataSiswaController@cetak_pdfsaldo')->name('cetakdetailsaldo');
 
 Route::get('/setoraninput', 'SetoranController@index')->name('setoraninput');
@@ -46,13 +46,18 @@ Route::get('/caridatajurnal', 'JurnalUmumController@index')->name('caridatajurna
 Route::get('/detailsaldosiswa/{id}/detailsaldo', 'DataSiswaController@show')->name('detailsaldosiswa');
 Route::get('/detailtransaksisiswa/{id}/detailtransaksi', 'DetailTransaksiController@show')->name('detailtransaksi');
 
+Route::post('cetaklaporan', 'LaporanController@cetak_pdflaporan')->name('cetaklaporan');
+Route::post('cetakjurnal', 'JurnalUmumController@cetak_pdflaporan')->name('cetakjurnal');
 Route::post('/tambahdata', 'TambahDataSiswaController@create')->name('tambahdata');
+Route::post('/tambahsaldoharian', 'LaporanHarianController@create')->name('tambahsaldoharian');
 Route::post('/importdatasiswa', 'ImportController@import_excel')->name('importdatasiswa');
 Route::post('/tambahdatajurusan', 'TambahDataKelasController@create')->name('tambahdatajurusan');
 Route::post('/tambahdataangka', 'TambahDataKelasController@create1')->name('tambahdataangka');
 Route::post('/tambahdatatahun', 'TambahDataKelasController@create2')->name('tambahdatatahun');
 Route::post('/updatedata/{id}/update', 'TambahDataSiswaController@update')->name('updatedata');
 Route::post('/updatenilai/{id}/update', 'KeterampilanController@update')->name('updatenilai');
+Route::post('datakelasUpdate', 'EditDataKelasController@updateKelas')->name('datakelasUpdate');
+
 
 
     Route::resource('dashboard', 'DashboardController');

@@ -37,7 +37,7 @@ class TambahDataSiswaController extends Controller
         if($request->id_kelas_meta != ''){
             $data_siswa = $data_siswa->where('id_kelas_meta',$request->id_kelas_meta);    
         }
-        $data_siswa = $data_siswa->paginate(5);
+        $data_siswa = $data_siswa->paginate(10);
         $kelas = \App\Kelas::all();
         $jurusan = \App\Jurusan::all();
         $kelasmeta = \App\KelasMeta::all();

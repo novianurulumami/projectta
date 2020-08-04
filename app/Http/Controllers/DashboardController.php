@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class DashboardController extends Controller
 {
     /**
@@ -20,8 +20,69 @@ class DashboardController extends Controller
         foreach ($transaksi as $key) {
             $categories[] = $key->status_transaksi;
         }
-        dd($categories);
-        return view('admin.dashboard.index', ['siswa' => $siswa, 'transaksi' => $transaksi]);
+
+        $bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+
+        $kelas = ['X','XI','XII'];
+
+        // setoran
+        $rekap = [];
+        for ($i=1; $i <= 12; $i++) { 
+            $setoran = \App\Transaksi::select(DB::raw('sum(nominal) as nominal,MONTH(created_at) as bulan'))
+                ->whereMonth('created_at',$i)
+                ->whereYear('created_at',date('Y'))
+                ->where('status_transaksi','Setoran')
+                ->groupBy('bulan')
+                ->first();
+
+            if($setoran == '')
+            $rekap[] = 0;
+            else 
+                $rekap[]= (int)$setoran['nominal'];
+        }
+
+         // saldo awal
+         $rekapSaldoAwal = [];
+         for ($i=1; $i <= 12; $i++) { 
+             $saldo = \App\Transaksi::select(DB::raw('sum(nominal) as nominal,MONTH(created_at) as bulan'))
+                 ->whereMonth('created_at',$i)
+                 ->whereYear('created_at',date('Y'))
+                 ->where('status_transaksi','Saldo Awal')
+                 ->groupBy('bulan')
+                 ->first();
+ 
+             if($saldo == '')
+                $rekapSaldoAwal[] = 0;
+             else 
+                $rekapSaldoAwal[]= (int)$saldo['nominal'];
+         }
+
+          // penarikan
+          $rekapPenarikan = [];
+          for ($i=1; $i <= 12; $i++) { 
+              $saldo = \App\Transaksi::select(DB::raw('sum(nominal) as nominal,MONTH(created_at) as bulan'))
+                  ->whereMonth('created_at',$i)
+                  ->whereYear('created_at',date('Y'))
+                  ->where('status_transaksi','Penarikan')
+                  ->groupBy('bulan')
+                  ->first();
+  
+              if($saldo == '')
+                $rekapPenarikan[] = 0;
+              else 
+                $rekapPenarikan[]= (int)$saldo['nominal'];
+          }
+
+
+        // dd(json_encode($categories));
+        return view('admin.dashboard.index', ['siswa' => $siswa, 
+        'transaksi' => $transaksi, 
+        'bulan' => $bulan,
+        'setoran' => $rekap,
+        'penarikan' => $rekapPenarikan,
+        'kelas' => $kelas,
+        'saldo' => $rekapSaldoAwal
+        ]);
     }
 
     /**

@@ -35,11 +35,11 @@
                     <td>{{$datasiswas->nama_kelas}}</td>
                     <td>{{$datasiswas->status_transaksi}}</td>
                     <td>
-                      {{$datasiswas->status_transaksi == 'Setoran' ? $datasiswas->nominal : '' }}
-                      {{$datasiswas->status_transaksi == 'Saldo Awal' ? $datasiswas->nominal : '' }}
+                      {{$datasiswas->status_transaksi == 'Setoran' ? 'Rp. '.$datasiswas->nominal : '' }}
+                      {{$datasiswas->status_transaksi == 'Saldo Awal' ? 'Rp. '.$datasiswas->nominal : '' }}
                       {{$datasiswas->status_transaksi == 'Penarikan' ? '-' : '' }}
                     </td>
-                    <td>{{$datasiswas->status_transaksi == 'Penarikan' ? $datasiswas->nominal : '-' }}</td>
+                    <td>{{$datasiswas->status_transaksi == 'Penarikan' ? 'Rp. '.$datasiswas->nominal : '-' }}</td>
                     </tr>
                   @endforeach
                   <tbody>

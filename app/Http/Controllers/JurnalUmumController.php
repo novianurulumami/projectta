@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class JurnalUmumController extends Controller
 {
@@ -80,6 +81,68 @@ class JurnalUmumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function cetak_pdflaporan(Request $request)
+    {
+        $cari = $request->cari;
+        $data_siswa = DB::table('transaksi')
+        ->select('transaksi.*','siswa1.nama','siswa1.nis','kelas1.nama_kelas')
+        ->join('siswa1','siswa1.id','=','transaksi.id_siswa')
+        ->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
+
+        $total = DB::table('transaksi')
+        ->select('transaksi.*','siswa1.nama','siswa1.nis','kelas1.nama_kelas')
+        ->join('siswa1','siswa1.id','=','transaksi.id_siswa')
+        ->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
+
+        if(!empty($request->cari)){
+            $data_siswa = $data_siswa->where('siswa1.nama','like',"%".$cari."%");
+            $total = $total->where('siswa1.nama','like',"%".$cari."%");
+        }
+        if($request->id_kelas != ''){
+            $data_siswa = $data_siswa->where('siswa1.kelas',$request->id_kelas);    
+            $total = $total->where('siswa1.kelas',$request->id_kelas);    
+        }
+        if($request->id_jurusan != ''){
+            $data_siswa = $data_siswa->where('siswa1.jurusan',$request->id_jurusan);    
+            $total = $total->where('siswa1.jurusan',$request->id_jurusan);    
+        }
+        if($request->id_kelas_meta != ''){
+            $data_siswa = $data_siswa->where('siswa1.angka',$request->id_kelas_meta);    
+            $total = $total->where('siswa1.angka',$request->id_kelas_meta);    
+        }
+
+        if($request->tanggalAwal != ''){
+            $data_siswa = $data_siswa->whereDate('transaksi.created_at','>=',$request->tanggalAwal);
+            $total = $total->whereDate('transaksi.created_at','>=',$request->tanggalAwal);
+        }else{
+            $data_siswa = $data_siswa->whereDate('transaksi.created_at','>=',date('Y-m-d',strtotime('-1 Week'))); 
+            $total = $total->whereDate('transaksi.created_at','>=',date('Y-m-d',strtotime('-1 Week'))); 
+        }
+
+        if($request->tanggalAkhir != ''){
+            $data_siswa = $data_siswa->whereDate('transaksi.created_at','<=',$request->tanggalAkhir);
+            $total = $total->whereDate('transaksi.created_at','<=',$request->tanggalAkhir);
+        } 
+        else{
+            $data_siswa = $data_siswa->whereDate('transaksi.created_at','<=',date('Y-m-d'));    
+            $total = $total->whereDate('transaksi.created_at','<=',date('Y-m-d'));    
+        }
+
+        $data_siswa = $data_siswa->get();
+        $total = $total->sum('nominal');
+        $kelas = \App\Kelas::all();
+        $jurusan = \App\Jurusan::all();
+        $kelasmeta = \App\KelasMeta::all();
+
+    	$pdf = PDF::loadview('admin.jurnalumum.file', ['data_siswa' => $data_siswa, 'total' => $total])->setPaper('A4', 'potrait');
+    	return $pdf->stream('jurnalumum.pdf');
+    }
+    
     public function create()
     {
         //

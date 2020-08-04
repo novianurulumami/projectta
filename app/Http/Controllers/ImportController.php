@@ -29,7 +29,7 @@ class ImportController extends Controller
         if(!empty($request->cari)){
             $data_siswa = $data_siswa->where('nama','like',"%".$cari."%");
         }
-        $data_siswa = $data_siswa->paginate(5);
+        $data_siswa = $data_siswa->paginate(10);
         $kelas = \App\Kelas::all();
         $jurusan = \App\Jurusan::all();
         $kelasmeta = \App\KelasMeta::all();

@@ -117,7 +117,6 @@
           </table>
           {{ $data_siswa->links() }}
 
-        <button type='button' class='btn btn-primary center-block'> Cetak </button>
 <script type="text/javascript">
 
     $('.date').datepicker({  

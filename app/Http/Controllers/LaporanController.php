@@ -24,7 +24,8 @@ class LaporanController extends Controller
         ->join('siswa1','siswa1.id','=','transaksi.id_siswa')
         ->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
         ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
-        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
+        ->orderBy('transaksi.created_at','desc');
 
        $setoran = DB::table('transaksi')
         ->join('siswa1','siswa1.id','=','transaksi.id_siswa')
@@ -117,23 +118,97 @@ class LaporanController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function cetak_pdflaporan()
+    public function cetak_pdflaporan(Request $request)
     {
+        $cari = $request->cari;
+
         $data_siswa = DB::table('transaksi')
         ->select('transaksi.*','siswa1.nama','siswa1.nis','kelas1.nama_kelas')
         ->join('siswa1','siswa1.id','=','transaksi.id_siswa')
         ->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
         ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
-        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
-        ->get();
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
 
-        $datasiswa = \App\Siswa::all();
+       $setoran = DB::table('transaksi')
+        ->join('siswa1','siswa1.id','=','transaksi.id_siswa')
+        ->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
+
+        $penarikan = DB::table('transaksi')
+        ->join('siswa1','siswa1.id','=','transaksi.id_siswa')
+        ->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
+
+        $saldoawal = DB::table('transaksi')
+        ->join('siswa1','siswa1.id','=','transaksi.id_siswa')
+        ->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
+        ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
+
+        if(!empty($request->cari)){
+            $data_siswa = $data_siswa->where('siswa1.nama','like',"%".$cari."%");
+           $setoran =$setoran->where('siswa1.nama','like',"%".$cari."%");
+           $penarikan =$penarikan->where('siswa1.nama','like',"%".$cari."%");
+           $saldoawal =$saldoawal->where('siswa1.nama','like',"%".$cari."%");
+        }
+        if($request->id_kelas != ''){
+            $data_siswa = $data_siswa->where('siswa1.kelas',$request->id_kelas);   
+           $setoran =$setoran->where('siswa1.kelas',$request->id_kelas);
+           $penarikan =$penarikan->where('siswa1.kelas',$request->id_kelas);
+           $saldoawal =$saldoawal->where('siswa1.kelas',$request->id_kelas);
+        }
+        if($request->id_jurusan != ''){
+            $data_siswa = $data_siswa->where('siswa1.jurusan',$request->id_jurusan);
+           $setoran =$setoran->where('siswa1.jurusan',$request->id_jurusan);    
+           $penarikan =$penarikan->where('siswa1.jurusan',$request->id_jurusan);    
+           $saldoawal =$saldoawal->where('siswa1.jurusan',$request->id_jurusan);    
+        }
+        if($request->id_kelas_meta != ''){
+            $data_siswa = $data_siswa->where('siswa1.angka',$request->id_kelas_meta); 
+           $setoran =$setoran->where('siswa1.angka',$request->id_kelas_meta);       
+           $penarikan =$penarikan->where('siswa1.angka',$request->id_kelas_meta);       
+           $saldoawal =$saldoawal->where('siswa1.angka',$request->id_kelas_meta);       
+        }
+
+        if($request->tanggalAwal != ''){
+            $data_siswa = $data_siswa->whereDate('transaksi.created_at','>=',$request->tanggalAwal);
+           $setoran =$setoran->whereDate('transaksi.created_at','>=',$request->tanggalAwal);
+           $penarikan =$penarikan->whereDate('transaksi.created_at','>=',$request->tanggalAwal);
+           $saldoawal =$saldoawal->whereDate('transaksi.created_at','>=',$request->tanggalAwal);
+        }else{
+            $data_siswa = $data_siswa->whereDate('transaksi.created_at','>=',date('Y-m-d',strtotime('-1 Week'))); 
+           $setoran =$setoran->whereDate('transaksi.created_at','>=',date('Y-m-d',strtotime('-1 Week')));
+           $penarikan =$penarikan->whereDate('transaksi.created_at','>=',date('Y-m-d',strtotime('-1 Week')));
+           $saldoawal =$saldoawal->whereDate('transaksi.created_at','>=',date('Y-m-d',strtotime('-1 Week')));
+        }
+
+        if($request->tanggalAkhir != ''){
+            $data_siswa = $data_siswa->whereDate('transaksi.created_at','<=',$request->tanggalAkhir);
+           $setoran =$setoran->whereDate('transaksi.created_at','<=',$request->tanggalAkhir);
+           $penarikan =$penarikan->whereDate('transaksi.created_at','<=',$request->tanggalAkhir);
+           $penarikan =$penarikan->whereDate('transaksi.created_at','<=',$request->tanggalAkhir);
+        } 
+        else{
+            $data_siswa = $data_siswa->whereDate('transaksi.created_at','<=',date('Y-m-d'));    
+           $setoran =$setoran->whereDate('transaksi.created_at','<=',date('Y-m-d')); 
+           $penarikan =$penarikan->whereDate('transaksi.created_at','<=',date('Y-m-d')); 
+           $saldoawal =$saldoawal->whereDate('transaksi.created_at','<=',date('Y-m-d')); 
+        }
+
+
+        $data_siswa = $data_siswa->get();
+        $setoran =$setoran->where('status_transaksi','Setoran')->sum('nominal');
+        $penarikan =$penarikan->where('status_transaksi','Penarikan')->sum('nominal');
+        $saldoawal =$saldoawal->where('status_transaksi','Saldo Awal')->sum('nominal');
+        $saldoakhir = $setoran - $penarikan + $saldoawal;
+
         $kelas = \App\Kelas::all();
         $jurusan = \App\Jurusan::all();
         $kelasmeta = \App\KelasMeta::all();
-        
 
-    	$pdf = PDF::loadview('admin.laporan.pdflaporancustom', ['datasiswa' => $datasiswa,], ['data_siswa' => $data_siswa])->setPaper('A4', 'potrait');
+    	$pdf = PDF::loadview('admin.laporan.pdflaporancustom', ['data_siswa' => $data_siswa])->setPaper('A4', 'potrait');
     	return $pdf->stream('Laporancustom.pdf');
     }
 

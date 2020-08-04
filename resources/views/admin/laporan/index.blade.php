@@ -137,11 +137,11 @@
               <td>{{$datasiswa->nama_kelas}}</td>
               <td>{{$datasiswa->status_transaksi}}</td>
               <td>
-                {{$datasiswa->status_transaksi == 'Setoran' ? $datasiswa->nominal : '' }}
-                {{$datasiswa->status_transaksi == 'Saldo Awal' ? $datasiswa->nominal : '' }}
+                {{$datasiswa->status_transaksi == 'Setoran' ? 'Rp. '.$datasiswa->nominal : '' }}
+                {{$datasiswa->status_transaksi == 'Saldo Awal' ? 'Rp. '.$datasiswa->nominal : '' }}
                 {{$datasiswa->status_transaksi == 'Penarikan' ? '-' : '' }}
               </td>
-              <td>{{$datasiswa->status_transaksi == 'Penarikan' ? $datasiswa->nominal : '-' }}</td>
+              <td>{{$datasiswa->status_transaksi == 'Penarikan' ? 'Rp. '.$datasiswa->nominal : '-' }}</td>
               </tr>
             @endforeach
             <tbody>
@@ -149,7 +149,15 @@
           </table>
           {{ $data_siswa->links() }}
 
-          <a href="{{route('cetaklaporan')}}" class="btn btn-primary" target="_blank">CETAK</a>
+          <form action="{{route('cetaklaporan')}}" method="POST">
+            <input type="hidden" name="id_kelas" id="" value="{{$input->id_kelas}}">
+            <input type="hidden" name="id_jurusan" id="" value="{{$input->id_jurusan}}">
+            <input type="hidden" name="id_kelas_meta" id="" value="{{$input->id_kelas_meta}}">
+            <input type="hidden" name="cari" id="" value="{{$input->cari}}">
+            <input type="hidden" name="tanggalAwal" id="" value="{{$input->tanggalAwal}}">
+            <input type="hidden" name="tanggalAkhir" id="" value="{{$input->tanggalAkhir}}">
+            <button type="submit" class="btn btn-primary" target="_blank">CETAK</button>
+          </form>
 
 <script type="text/javascript">
 

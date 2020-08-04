@@ -22,7 +22,8 @@ class LaporanSeluruhController extends Controller
         ->join('siswa1','siswa1.id','=','transaksi.id_siswa')
         ->join('kelas1','kelas1.id_kelas','=','siswa1.kelas') 
         ->join('jurusan','jurusan.id_jurusan','=','siswa1.jurusan')
-        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka');
+        ->join('kelas_meta','kelas_meta.id_kelas_meta','=','siswa1.angka')
+        ->orderBy('transaksi.created_at','desc');
 
        $setoran = DB::table('transaksi')
         ->join('siswa1','siswa1.id','=','transaksi.id_siswa')
@@ -60,7 +61,7 @@ class LaporanSeluruhController extends Controller
         $setoran =$setoran->where('status_transaksi','Setoran')->sum('nominal');
         $penarikan =$penarikan->where('status_transaksi','Penarikan')->sum('nominal');
         $saldoawal =$saldoawal->where('status_transaksi','Saldo Awal')->sum('nominal');
-        $saldoakhir = $setoran - $penarikan + $saldoawal;
+        $saldoakhir = $saldoawal + $setoran - $penarikan;
 
         $kelas = \App\Kelas::all();
         $jurusan = \App\Jurusan::all();

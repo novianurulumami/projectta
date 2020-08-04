@@ -170,8 +170,16 @@
     </div>
     </div>
 </div>
+<form action="{{route('cetakjurnal')}}" method="POST">
+  <input type="hidden" name="id_kelas" id="" value="{{$input->id_kelas}}">
+  <input type="hidden" name="id_jurusan" id="" value="{{$input->id_jurusan}}">
+  <input type="hidden" name="id_kelas_meta" id="" value="{{$input->id_kelas_meta}}">
+  <input type="hidden" name="cari" id="" value="{{$input->cari}}">
+  <input type="hidden" name="tanggalAwal" id="" value="{{$input->tanggalAwal}}">
+  <input type="hidden" name="tanggalAkhir" id="" value="{{$input->tanggalAkhir}}">
+  <button type="submit" class="btn btn-primary" target="_blank">CETAK</button>
+</form>
 
-<button type='button' class='btn btn-primary center-block'> Cetak </button>
 
 <script type="text/javascript">
 

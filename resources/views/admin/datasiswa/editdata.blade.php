@@ -34,71 +34,41 @@
                  @endforeach
               </select>
             </li>
-            <button class="btn btn-default" type="submit"><i class="fa fa-search"></i>
+            <button class="btn btn-default" type="submit" ><i class="fa fa-search"></i>
             </button>
           </ul>
         </form>
-
-        <br>
-        <a href="#" class="btn btn-info active right" role="button" data-toggle="modal" data-target="#exampleModal" onclick="refresh()">Edit Kelas</a>
         <br></br>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">EDIT DATA KELAS</h5>
-            
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
+        <form action="{{route('datakelasUpdate')}}" method="POST">
 
-            <form method="post" action="http://localhost/trystore/index.php/menu/pengguna/simpan" enctype="multipart/form-data" class="formpengguna">
-            <div class="form-group">
-
-            
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="well" style="overflow: auto">
             <div class="form-group">
               <label >PILIH KELAS</label>
-              <select class="form-control required" name="groupuser" id="groupuser" required>
-                                         <option value="113">X</option>
-                                          <option value="114">XI</option>
-                                          <option value="115">XII</option>
+              <select class="form-control required" name="kelas_awal" id="groupuser" required>
+                @foreach ($kelas as $key => $item)
+                <option value="{{$item->id_kelas}}" {{($item->id_kelas == $input->id_kelas) ? "selected" : ""}}>
+                  {{$item->nama_kelas}}</option>
+                @endforeach
               </select>
             </div>
-
-            <div class="form-group">
-              <label >PILIH JURUSAN</label>
-              <select class="form-control required" name="groupuser" id="groupuser" required>
-                                         <option value="113">AKUNTANSI</option>
-                                          <option value="114">MULTIMEDIA</option>
-                                          <option value="115">PEMASARAN</option>
-                                          <option value="116">PERKANTORAN</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label >PILIH ANGKA</label>
-              <select class="form-control required" name="groupuser" id="groupuser" required>
-                                         <option value="113">1</option>
-                                          <option value="114">2</option>
-                                          <option value="115">3</option>
-                                          <option value="116">4</option>
-                                          <option value="115">5</option>
-                                          <option value="116">6</option>
-              </select>
-            </div>
-
-            </div>
           </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary buttonsave" value="save"><i class="fa fa-save"></i> Simpan</button>
-          </div>
-          </form>
-          </div>
-        </div>
-        </div>
-        </div>
+  </div>
+  <div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="well" style="overflow: auto">
+      <div class="form-group">
+        <label >PILIH KELAS</label>
+        <select class="form-control required" name="kelas_ubah" id="groupuser" required>
+          @foreach ($kelas as $key => $item)
+          <option value="{{$item->id_kelas}}" {{($item->id_kelas == $input->id_kelas) ? "selected" : ""}}>
+            {{$item->nama_kelas}}</option>
+          @endforeach
+        </select>
+      </div>
+      <button class="btn btn-primary" type="submit"  onclick="return confirm('Ubah permanen data ini?')">Ubah</button>
+    </div>
+</div>
+</form>
 
       <div class="box-body">
           <table class="table table-hover table-stripped table-bordered">
